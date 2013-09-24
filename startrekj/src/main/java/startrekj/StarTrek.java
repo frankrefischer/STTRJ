@@ -17,45 +17,48 @@ public class StarTrek {
 	private STRING R$;
 	private STRING S$;
 	private STRING Z$;
-	
+
 	private ARRAY_2DIM<Integer> G = new ARRAY_2DIM(8, 8);
 	private ARRAY_2DIM C = new ARRAY_2DIM(9, 2);
 	private ARRAY_2DIM K = new ARRAY_2DIM(3, 3);
 	private ARRAY<Integer> N = new ARRAY<Integer>(3);
 	private ARRAY_2DIM Z = new ARRAY_2DIM(8, 8);
-	
+
 	private int T0, T, T9, D0, E0, E, P0, P, S9, S, H8, Q1, Q2, S1, S2, T7;
-	
+
 	private int B9, K9;
-	
+
 	private int I, J;
-	
+
 	private double R1;
-	
+
+	private double R2;
+
 	private int K3;
-	
+
 	private int B3;
-	
+
 	private int S3;
-	
+
 	private int K7;
-	
+
 	private double X;
-	
-	private int Z1, Z2;
-	
+
+	private int Z1, Z2, Z3;
+	private double Z1_double, Z2_double;
+
 	private int S8;
-	
+
 	private ARRAY<Integer> D = new ARRAY<Integer>(8);
 
 	private Runnable nextRunnable;
-	
+
 	private void run() {
-		for(Runnable runnable = LINE_1; runnable != null; runnable = nextRunnable) {
+		for (Runnable runnable = LINE_1; runnable != null; runnable = nextRunnable) {
 			nextRunnable = null;
 			runnable.run();
 		}
-		
+
 	}
 
 	private Runnable LINE_X = new Runnable() {
@@ -87,21 +90,23 @@ public class StarTrek {
 		public void run() {
 			Z$.set("                                                                      ");
 			GOSUB(LINE_5460);
-			T0=T=INT(RND()*20+20)*100;
-			T9=30;
-			D0=0;
-			E0=E=3000;
-			P0=P=10;
-			S9=200;
-			S=H8=0;
-			Q1=INT(RND()*8+1);
-			Q2=INT(RND()*8+1);
-			S1=INT(RND()*8+1);
-			S2=INT(RND()*8+1);
-			T7=TIM0()+60*TIM1();
-			C.set(2,1, -1).set(3,1, -1).set(4,1, -1).set(4,2, -1).set(5,2, -1).set(6,2, -1);
-			C.set(1,1, 0).set(1,1, 0).set(1,1, 0).set(1,1, 0).set(1,1, 0);
-			C.set(1,2, 1).set(2,2, 1).set(6,1, 1).set(7,1, 1).set(8,1, 1).set(8,2, 1).set(9,2, 1);
+			T0 = T = INT(RND() * 20 + 20) * 100;
+			T9 = 30;
+			D0 = 0;
+			E0 = E = 3000;
+			P0 = P = 10;
+			S9 = 200;
+			S = H8 = 0;
+			Q1 = INT(RND() * 8 + 1);
+			Q2 = INT(RND() * 8 + 1);
+			S1 = INT(RND() * 8 + 1);
+			S2 = INT(RND() * 8 + 1);
+			T7 = TIM0() + 60 * TIM1();
+			C.set(2, 1, -1).set(3, 1, -1).set(4, 1, -1).set(4, 2, -1)
+					.set(5, 2, -1).set(6, 2, -1);
+			C.set(1, 1, 0).set(1, 1, 0).set(1, 1, 0).set(1, 1, 0).set(1, 1, 0);
+			C.set(1, 2, 1).set(2, 2, 1).set(6, 1, 1).set(7, 1, 1).set(8, 1, 1)
+					.set(8, 2, 1).set(9, 2, 1);
 			D.setAllTo(0);
 			D$.set("WARP ENGINESS.R. SENSORSL.R. SENSORSPHASER CNTRL");
 			D$.setWithOneBasedIndex(49, "PHOTON TUBESDAMAGE CNTRL");
@@ -111,51 +116,49 @@ public class StarTrek {
 	};
 	private Runnable LINE_490 = new Runnable() {
 		public void run() {
-			B9=K9=0;
-			for(I=1; I<=8; ++I) {
-				for(J=1; J<=8; ++J) {
-					R1=RND();
-					if (R1>.98) {
-						K3=3;
-						K9=K9+3;
-					}
-					else if (R1>.95) {
-						K3=2;
-						K9=K9+2;
-					}
-					else if (R1>.8) {
-						K3=1;
-						K9=K9+1;
-					}
-					else
-						K3=0;
-					R1=RND();
-					if(R1>.96) {
-						B3=1;
-						B9=B9+1;
+			B9 = K9 = 0;
+			for (I = 1; I <= 8; ++I) {
+				for (J = 1; J <= 8; ++J) {
+					R1 = RND();
+					if (R1 > .98) {
+						K3 = 3;
+						K9 = K9 + 3;
+					} else if (R1 > .95) {
+						K3 = 2;
+						K9 = K9 + 2;
+					} else if (R1 > .8) {
+						K3 = 1;
+						K9 = K9 + 1;
+					} else
+						K3 = 0;
+					R1 = RND();
+					if (R1 > .96) {
+						B3 = 1;
+						B9 = B9 + 1;
 					} else
 						B3 = 0;
-					S3=INT(RND()*8+1);
-					G.set(I, J, K3*100+B3*10+S3);
+					S3 = INT(RND() * 8 + 1);
+					G.set(I, J, K3 * 100 + B3 * 10 + S3);
 					Z.set(I, J, 0);
 				}
 			}
-			K7=K9;
-			if(B9 <= 0 || K9 <= 0) {
+			K7 = K9;
+			if (B9 <= 0 || K9 <= 0) {
 				GOTO(LINE_490);
 				return;
 			}
-			PRINT("YOU MUST DESTROY "+K9+" KLINGONS IN "+T9+" STARDATES WITH "+B9+" STARBASES");
-			K3=B3=S3=0;
-			if(Q1<1 || Q1>8 || Q2<1 || Q2>8) {
+			PRINT("YOU MUST DESTROY " + K9 + " KLINGONS IN " + T9
+					+ " STARDATES WITH " + B9 + " STARBASES");
+			K3 = B3 = S3 = 0;
+			if (Q1 < 1 || Q1 > 8 || Q2 < 1 || Q2 > 8) {
 				GOTO(LINE_920);
 				return;
 			}
-			X=G.get(Q1,Q2)*0.1;
-			K3=INT(X);
-			B3=INT((X-K3)*10);
-			S3=G.get(Q1,Q2)-INT(G.get(Q1,Q2)*.1)*10;
-			if(K3==0 || S>200)
+			X = G.get(Q1, Q2) * 0.1;
+			K3 = INT(X);
+			B3 = INT((X - K3) * 10);
+			S3 = G.get(Q1, Q2) - INT(G.get(Q1, Q2) * .1) * 10;
+			if (K3 == 0 || S > 200)
 				;
 			else {
 				PRINT("COMBAT AREA      CONDITION RED");
@@ -167,36 +170,85 @@ public class StarTrek {
 	};
 	private Runnable LINE_920 = new Runnable() {
 		public void run() {
-			for(I=1; I<=3; ++I)
-				K.set(I,3, 0);
-			Q$=Z$;
-			R$=Z$;
-			S$=Z$.slice(1,48);
+			for (I = 1; I <= 3; ++I)
+				K.set(I, 3, 0);
+			Q$ = Z$;
+			R$ = Z$;
+			S$ = Z$.slice(1, 48);
 			A$.set("<*>");
-			Z1=S1;
-			Z2=S2;
+			Z1 = S1;
+			Z2 = S2;
 			GOSUB(LINE_5510);
+			for (I = 1; I < 3; ++I) {
+				GOSUB(LINE_5380);
+			}
+			A$.set("+++");
+			Z1_double=R1;
+			Z2_double=R2;
+			GOSUB(LINE_5510);
+//			K.set(I,1,R1);
+		}
+	};
+	private Runnable LINE_5380 = new Runnable() {
+		public void run() {
+			do {
+				R1=INT(RND()*8+1);
+				R2=INT(RND()*8+1);
+				A$.set("   ");
+				Z1_double=R1;
+				Z2_double=R2;
+				GOSUB(LINE_5680);
+			} while(Z3==0);
 		}
 	};
 	private Runnable LINE_5510 = new Runnable() {
 		public void run() {
-			S8=Z1*24+Z2*3-26;
-			if (S8>72) {
-				if(S8>144) {
-					
+			S8 = Z1 * 24 + Z2 * 3 - 26;
+			if (S8 > 72) {
+				if (S8 > 144) {
+
 				}
 			} else {
-				
+
 				return;
 			}
 		}
 	};
 	private Runnable LINE_5460 = new Runnable() {
 		public void run() {
-			for(int i = 1; i <= 11; i++)
+			for (int i = 1; i <= 11; i++)
 				PRINT();
 			PRINT();
 			return;
+		}
+	};
+	private Runnable LINE_5680 = new Runnable() {
+		public void run() {
+			Z1=INT(Z1_double+.5);
+			Z2=INT(Z2_double+.5);
+			S8=Z1*24+Z2*3-26;
+			Z3=0;
+			if(S8>72) { // 5750
+				if (S8>144) { // 5790
+					if (!S$.slice(S8-144,S8-142).equals(A$)) {
+						return;
+					} else {
+						Z3 = 1;
+						return;
+					}
+				} else if (!R$.slice(S8-72, S8-70).equals(A$)) {
+					return;
+				} else {
+					Z3=1;
+					return;
+				}
+			}else if (!Q$.slice(S8, S8+2).equals(A$)) {
+				return;
+			} else {
+				Z3=1;
+				return;
+			}
+				
 		}
 	};
 	private Runnable LINE_5820 = new Runnable() {
@@ -263,6 +315,7 @@ public class StarTrek {
 			return;
 		}
 	};
+
 	private String INPUT() {
 		return new Scanner(System.in).nextLine();
 	}
@@ -294,6 +347,7 @@ public class StarTrek {
 	private void PRINT() {
 		System.out.println();
 	}
+
 	private int INT(double d) {
 		return (int) Math.ceil(d);
 	}

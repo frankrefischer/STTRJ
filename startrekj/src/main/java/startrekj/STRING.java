@@ -26,5 +26,14 @@ public class STRING {
 			slice.chars[i] = chars[i+start];
 		return slice;
 	}
-
+	@Override
+	public boolean equals(Object other) {
+		STRING otherSTRING = (STRING) other;
+		if ( otherSTRING.chars.length != chars.length )
+			return false;
+		for(int i = 0; i < chars.length; ++i)
+			if ( chars[i] != otherSTRING.chars[i] )
+				return false;
+		return true;
+	}
 }
