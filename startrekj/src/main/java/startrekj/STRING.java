@@ -20,9 +20,10 @@ public class STRING {
 			chars[j+i-1] = charArray[j];
 	}
 
-	public STRING slice(int i, int j) {
-		STRING slice = new STRING(i-j+1);
-		StringBuilder x;
+	public STRING slice(int start, int end) {
+		STRING slice = new STRING(end-start+1);
+		for(int i=0; i<slice.chars.length; ++i)
+			slice.chars[i] = chars[i+start];
 		return slice;
 	}
 

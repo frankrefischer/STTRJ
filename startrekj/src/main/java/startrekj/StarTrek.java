@@ -145,7 +145,7 @@ public class StarTrek {
 				GOTO(LINE_490);
 				return;
 			}
-			PRINT("YOU MUST DESTROY"+K9+" KLINGONS IN"+T9+" STARDATES WITH"+B9+" STARBASES");
+			PRINT("YOU MUST DESTROY "+K9+" KLINGONS IN "+T9+" STARDATES WITH "+B9+" STARBASES");
 			K3=B3=S3=0;
 			if(Q1<1 || Q1>8 || Q2<1 || Q2>8) {
 				GOTO(LINE_920);
@@ -162,6 +162,11 @@ public class StarTrek {
 				PRINT("   SHIELDS DANGEROUSLY LOW");
 			}
 			K.setAllTo(0);
+			GOTO(LINE_920);
+		}
+	};
+	private Runnable LINE_920 = new Runnable() {
+		public void run() {
 			for(I=1; I<=3; ++I)
 				K.set(I,3, 0);
 			Q$=Z$;
@@ -171,10 +176,6 @@ public class StarTrek {
 			Z1=S1;
 			Z2=S2;
 			GOSUB(LINE_5510);
-		}
-	};
-	private Runnable LINE_920 = new Runnable() {
-		public void run() {
 		}
 	};
 	private Runnable LINE_5510 = new Runnable() {
