@@ -36,4 +36,9 @@ public class STRING {
 				return false;
 		return true;
 	}
+
+	public void replace(int start, int end, STRING string) {
+		for(int i = start; i < end - start + 1; ++i)
+			chars[i] = string.chars[i-start+1];
+	}
 }

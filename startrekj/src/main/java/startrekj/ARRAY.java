@@ -14,4 +14,8 @@ public class ARRAY<T> {
 		Arrays.fill(array, value);
 	}
 
+	public T get(int i) {
+		return (T)array[i];
+	}
+
 }
