@@ -21,5 +21,4 @@ public class ARRAY<T> {
 	public void set(int i, T value) {
 		array[i] = value;
 	}
-
 }
