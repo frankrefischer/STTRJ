@@ -7,7 +7,7 @@ public class ARRAY_2DIM<T> {
 	public ARRAY_2DIM(int i, int j) {
 		array = new Object[i][j];
 	}
-	public ARRAY_2DIM<T> set(int i, int j, Integer k) {
+	public ARRAY_2DIM<T> set(int i, int j, T k) {
 		array[i-1][j-1] = k;
 		return this;
 	}

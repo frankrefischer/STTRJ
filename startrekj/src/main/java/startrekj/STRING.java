@@ -23,7 +23,7 @@ public class STRING {
 	public STRING slice(int start, int end) {
 		STRING slice = new STRING(end-start+1);
 		for(int i=0; i<slice.chars.length; ++i)
-			slice.chars[i] = chars[i+start];
+			slice.chars[i] = chars[i+start-1];
 		return slice;
 	}
 	@Override
@@ -35,5 +35,14 @@ public class STRING {
 			if ( chars[i] != otherSTRING.chars[i] )
 				return false;
 		return true;
+	}
+
+	public void replace(int start, int end, STRING string) {
+		for(int i = start; i < end - start + 1; ++i)
+			chars[i] = string.chars[i-start+1];
+	}
+	@Override
+	public String toString() {
+		return String.valueOf(chars);
 	}
 }
