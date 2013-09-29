@@ -551,10 +551,131 @@ public class StarTrek {
 					}
 				} else if(A+1==6) {
 					//3460
+					if(D.get(7)>=0)
+						;
+					else {
+						PRINT("SHIELD CONTROL IS NON-OPERATIONAL");
+						continue line_1270;
+					}
+					line_3490: while(true) {
+						PRINT("ENERGY AVAILABLE = "+(E+S)+"   NUMBER OF UNITS TO SHIELDS:");
+						X=INPUT_int();
+						if(X<=0)
+							continue line_1270;
+						if(E+S-X<0)
+							continue line_3490;
+						E=(int)(E+S-X);
+						S=(int)X;
+						continue line_1270;
+					}
 				} else if(A+1==7) {
 					//3560
+					if(D.get(6) >= 0)
+						;
+					else {
+						PRINT("DAMAGE CONTROL REPORT IS NOT AVAILABLE");
+						continue line_1270;
+					}
+					PRINT();
+					PRINT("DEVICE        STATE OF REPAIR");
+					for(R1=1; R1<=8; ++R1) {
+						LINE_5610();
+						PRINT(D.get(R1));
+					}
+					PRINT();
+					continue line_1270;
 				} else if(A+1==8) {
 					//4630
+					if(D.get(8) >= 0)
+						;
+					else {
+						PRINT("COMPUTER DISABLED");
+						continue line_1270;
+					}
+					line_4660: while(true) {
+						PRINT("COMPUTER ACTIVE AND AWAITING COMMAND");
+						A=INPUT_int();
+						if(A+1==1) {
+							//4740
+							PRINT_USING_4750(Q1,Q2);
+							PRINT_USING_5330();
+							PRINT_USING_5360();
+							for(I=1; I<=8; ++I) {
+								PRINT_USING_5350(I,Z.get(I, 1),Z.get(I, 2),Z.get(I, 3),Z.get(I, 4),Z.get(I, 5),Z.get(I, 6),Z.get(I, 7),Z.get(I, 8));
+								PRINT_USING_5360();
+							}
+							continue line_1270;
+						} else if (A+1==2) {
+							//4830
+							PRINT("#   STATUS REPORT#");
+							PRINT("NUMBER OF KLINGONS LEFT = " +K9);
+							PRINT("NUMBER OF STARDATES LEFT = "+((T0+T9)-T));
+							PRINT("NUMBER OF STARBASES LEFT = "+B9);
+							//3560
+							if(D.get(6) >= 0)
+								;
+							else {
+								PRINT("DAMAGE CONTROL REPORT IS NOT AVAILABLE");
+								continue line_1270;
+							}
+							PRINT();
+							PRINT("DEVICE        STATE OF REPAIR");
+							for(R1=1; R1<=8; ++R1) {
+								LINE_5610();
+								PRINT(D.get(R1));
+							}
+							PRINT();
+							continue line_1270;
+						} else if (A+1==3) {
+							//4880
+							PRINT();
+							H8=0;
+							for(I=1; I<=3; ++I) {
+								if(K.get(I, 3) <= 0)
+									continue;
+								C1=S1;
+								A=S2;
+								W1=K.get(I, 1);
+								X=K.get(I,2);
+								//5010
+								X=X-A;
+								A=C1-W1;
+								if(X<0) {
+									//5130
+								} else if(A<0){
+									//5190
+								} else if(X>0){
+									//5070
+								} else if(A==0){
+									//5150
+								}
+								C1=1;
+								if(ABS(A) <= ABS(X)) {
+									//5110
+								} else {
+									PRINT("DIRECTION = " + (C1+(((ABS(A)-ABS(X))+ABS(A))/ABS(A))));
+									//5240
+									PRINT("DISTANCE = "+(Math.sqrt(X*X+A*A)));
+									if(H8==1)
+										continue line_1270;
+									continue;
+								}
+							}
+							H8=0;
+							PRINT("DO YOU WANT TO USE THE CALCULATOR");
+							A$.set(INPUT());
+							if("YES".equals(A$)) {
+								//4970
+							} else {
+								//5280
+							}
+						}
+						PRINT("FUNCTIONS AVAILABLE FROM COMPUTER");
+						PRINT("   0 = CUMULATIVE GALACTIC RECORD");
+						PRINT("   1 = STATUS REPORT");
+						PRINT("   2 = PHOTON TORPEDO DATA");
+						continue line_4660;
+					}					
 				} else {
 					PRINT();
 					PRINT("   0 = SET COURSE");
@@ -1069,10 +1190,25 @@ public class StarTrek {
 	private void PRINT_USING_4620(STRING s1, STRING s2, STRING s3, STRING s4, STRING s5, STRING s6, STRING s7, STRING s8, int s) {
 		System.out.printf(" %s %s %s %s %s %s %s %s        SHIELDS        %s\n", s1, s2, s3, s4, s5, s6, s7, s8, s);
 	}
+	private void PRINT_USING_4750(int q1, int q2) {
+		System.out.printf("COMPUTER RECORD OF GALAXY FOR QUADRANT 5s,%s\n", q1, q2);
+	}
+	private void PRINT_USING_5330() {
+		System.out.printf("     1     2     3     4     5     6     7     8\n");
+	}
+	private void PRINT_USING_5350(int i, int z1, int z2, int z3, int z4, int z5, int z6, int z7, int z8) {
+		System.out.printf("%s   %s   %s   %s   %s   %s   %s   %s   %s\n", i, z1, z2, z3, z4, z5, z6, z7, z8);
+	}
+	private void PRINT_USING_5360() {
+		System.out.printf("   ----- ----- ----- ----- ----- ----- ----- -----\n");
+	}
 	private void PRINT_USING_5370(int s1, int s2) {
 		System.out.printf(" WARP ENGINES SHUTDOWN AT SECTOR %s,%s DUE TO BAD NAVIGATION\n", s1, s2);
 	}
 	private int INT(double d) {
 		return (int) Math.floor(d);
+	}
+	private double ABS(double d) {
+		return (int) Math.abs(d);
 	}
 }
