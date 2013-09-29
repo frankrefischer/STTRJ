@@ -18,4 +18,8 @@ public class ARRAY<T> {
 		return (T)array[i];
 	}
 
+	public void set(int i, T value) {
+		array[i] = value;
+	}
+
 }

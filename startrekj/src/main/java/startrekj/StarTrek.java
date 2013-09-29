@@ -20,19 +20,20 @@ public class StarTrek {
 
 	private ARRAY_2DIM<Integer> G = new ARRAY_2DIM<Integer>(8, 8);
 	private ARRAY_2DIM<Integer> C = new ARRAY_2DIM<Integer>(9, 2);
-	private ARRAY_2DIM<Double> K = new ARRAY_2DIM<Double>(3, 3);
+	private ARRAY_2DIM<Integer> K = new ARRAY_2DIM<Integer>(3, 3);
 	private ARRAY<Integer> N = new ARRAY<Integer>(3);
+	private int N_int;
 	private ARRAY_2DIM<Integer> Z = new ARRAY_2DIM<Integer>(8, 8);
 
-	private int T0, T, T9, D0, E0, E, P0, P, S9, S, H8, Q1, Q2, S1, S2, T7;
+	private int T0, T1, T, T9, D0, E0, E, P0, P, S9, S, H8, Q1, Q2, S1, S2, T7;
 
 	private int B9, K9;
 
 	private int I, J;
 
-	private double R1;
+	private int R1, R2;
 
-	private double R2;
+	private double R1_double;
 
 	private int K3;
 
@@ -42,13 +43,21 @@ public class StarTrek {
 
 	private int K7;
 
-	private double X;
+	private double X, Y;
 
+	private int X_int;
+	
 	private int Z1, Z2, Z3;
 	private double Z1_double, Z2_double;
 
 	private int S8;
+	
+	private int A, C1, C2, W1;
+	
+	private double H;
 
+	private int X1, X2;
+	
 	private ARRAY<Integer> D = new ARRAY<Integer>(8);
 
 	private Runnable nextRunnable;
@@ -56,15 +65,15 @@ public class StarTrek {
 	private void run() {
 		for (Runnable runnable = LINE_1; runnable != null; runnable = nextRunnable) {
 			nextRunnable = null;
-			runnable.run();
+			try {
+				runnable.run();
+			} catch(ExeceptionalGOTO execeptionalGOTO) {
+				nextRunnable = execeptionalGOTO.getNextRunnable();
+			}
 		}
 
 	}
 
-	private Runnable LINE_X = new Runnable() {
-		public void run() {
-		}
-	};
 	private Runnable LINE_1 = new Runnable() {
 		public void run() {
 			LINE_5460();
@@ -119,19 +128,19 @@ public class StarTrek {
 			B9 = K9 = 0;
 			for (I = 1; I <= 8; ++I) {
 				for (J = 1; J <= 8; ++J) {
-					R1 = RND();
-					if (R1 > .98) {
+					R1_double = RND();
+					if (R1_double > .98) {
 						K3 = 3;
 						K9 = K9 + 3;
-					} else if (R1 > .95) {
+					} else if (R1_double > .95) {
 						K3 = 2;
 						K9 = K9 + 2;
-					} else if (R1 > .8) {
+					} else if (R1_double > .8) {
 						K3 = 1;
 						K9 = K9 + 1;
 					} else
 						K3 = 0;
-					R1 = RND();
+					R1_double = RND();
 					if (R1 > .96) {
 						B3 = 1;
 						B9 = B9 + 1;
@@ -149,6 +158,12 @@ public class StarTrek {
 			}
 			PRINT("YOU MUST DESTROY " + K9 + " KLINGONS IN " + T9
 					+ " STARDATES WITH " + B9 + " STARBASES");
+			GOTO(LINE_810);
+			return;
+		}
+	};
+	private Runnable LINE_810 = new Runnable() {
+		public void run() {
 			K3 = B3 = S3 = 0;
 			if (Q1 < 1 || Q1 > 8 || Q2 < 1 || Q2 > 8) {
 			} else {
@@ -164,7 +179,7 @@ public class StarTrek {
 				}
 			}
 			for (I = 1; I <= 3; ++I)
-				K.set(I, 3, 0.0);
+				K.set(I, 3, 0);
 			Q$ = Z$;
 			R$ = Z$;
 			S$ = Z$.slice(1, 48);
@@ -180,9 +195,9 @@ public class StarTrek {
 				Z1_double=R1;
 				Z2_double=R2;
 				LINE_5510();
-				K.set(I, 1, R1);
-				K.set(I, 2, R2);
-				K.set(I, 3, (double)S9);
+				K.set(I, 1, (int)R1);
+				K.set(I, 2, (int)R2);
+				K.set(I, 3, S9);
 			}
 			// 1120
 			for(I=1; I<=B3; ++I) {
@@ -201,10 +216,369 @@ public class StarTrek {
 				LINE_5510();
 			}
 			LINE_4120();
-			PRINT("COMMAND:");
-			
+			//1270
+			line_1270:
+			while(true) {
+				PRINT("COMMAND:");
+				A=INPUT_int();
+				if(A+1==1) {
+					line_1410:
+					while(true) {
+						PRINT("COURSE (1-9):");
+						C1=INPUT_int();
+						if(C1==0)
+							continue line_1270;
+						if(C1<1 || C1>=9)
+							continue line_1410;
+						PRINT("WARP FACTOR (0-8):");
+						W1=INPUT_int();
+						if(W1<0 || W1>8)
+							continue line_1410;
+						if(D.get(1)>=0 || W1<=.2) {
+							//1510
+							if(K3>0)
+								LINE_3790();
+							if(K3>0) {
+								if(S<0) {
+									LINE_4000();
+									throw new RuntimeException("unreachable line reached");
+								}
+								//-->1610
+							} else {
+								//1560
+								if(E>0) {
+								//-->1610
+								} else {
+									if(S<1) {
+										LINE_3920();
+										throw new RuntimeException("unreachable line reached");
+									} else {
+										PRINT("YOU HAVE "+E+" UNITS OF ENERGY");
+										PRINT("SUGGEST YOU GET SOME FROM YOUR SHIELDS WHICH HAVE "+S+" UNITS LEFT");
+										continue line_1270;
+									}
+								}
+							}
+							//1610
+							for(I=1; I<=8; ++I) {
+								if(D.get(I) >= 0) {
+									continue;
+								} else {
+									D.set(I, D.get(I)+1);
+								}
+							}
+							if(RND()>.2) {
+								//-->1810
+							} else {
+								R1=INT(RND()*8+1);
+								if(RND()>=.5) {
+									D.set((int)R1, (int)(D.get((int)R1)-(RND()*5+1)));
+									PRINT();
+									PRINT("DAMAGE CONTROL REPORT:");
+									LINE_5610();
+									PRINT(" STATE OF REPAIR IMPROVED");
+									PRINT();
+									//1810
+								} else {
+									D.set((int)R1, (int)(D.get((int)R1)-(RND()*5+1)));
+									PRINT();
+									PRINT("DAMAGE CONTROL REPORT:");
+									LINE_5610();
+									PRINT(" DAMAGED");
+									PRINT();
+									//-->1810
+								}
+							}
+							//1810
+							N_int=INT(W1*8);
+							A$.set("   ");
+							Z1=S1;
+							Z2=S2;
+							LINE_5510();
+							X=S1;
+							Y=S2;
+							C2=INT(C1);
+							X1=C.get(C2, 1)+(C.get(C2+1,1)-C.get(C2,1))*(C1-C2);
+							X2=C.get(C2, 2)+(C.get(C2+1,2)-C.get(C2,2))*(C1-C2);
+							for(I=1; I<=N_int; ++I) {
+								S1=S1+X1;
+								S2=S2+X2;
+								if(S1<.5 || S1 >= 8.5 || S2<.5 || S2 >= 8.5) {
+									//2170
+									X=Q1*8+X+X1*N_int;
+									Y=Q2*8+Y+X2*N_int;
+									Q1=INT(X/8);
+									Q2=INT(Y/8);
+									S1=INT(X-Q1*8+.5);
+									S2=INT(Y-Q2*8+.5);
+									if(S1 != 0) {
+										//-->2260
+									} else {
+										Q1=Q1-1;
+										S1=8;
+									}
+									//2260
+									if(S2 != 0) {
+										//-->2290
+									} else {
+										Q2=Q2-1;
+										S2=8;
+									}
+									//2290
+									T=T+1;
+									E=E-N_int+5;
+									if(T>T0+T9) {
+										LINE_3970();
+										throw new RuntimeException("unreachable line reached");
+									} else {
+										GOTO(LINE_810);
+										throw new RuntimeException("unreachable line reached");
+									}
+
+								} else {
+									A$.set("   ");
+									Z1=S1;
+									Z2=S2;
+									LINE_5680();
+									if(Z3 != 0 ) {
+										continue;
+									} else {
+										PRINT_USING_5370(S1,S2);
+										S1=S1-X1;
+										S2=S2-X2;
+										break;
+									}
+								}
+							}
+							//2080
+							A$.set("<*>");
+							S1=INT(S1+.5);
+							S2=INT(S2+.5);
+							Z1=S1;
+							Z2=S2;
+							LINE_5510();
+							E=E-N_int+5;
+							if(W1<1) {
+							} else {
+								T=T+1;
+							}
+							if(T>T0+T9) {
+								LINE_3970();
+								throw new RuntimeException("unreachable line reached");
+							} else {
+								GOTO(LINE_810);
+								return;
+							}
+						} else {
+							PRINT("WARP ENGINES ARE DAMAGED, MAXIMUM SPEED = WARP .2");
+							continue line_1410;
+						}
+					}
+				} else if(A+1==2) {
+					//1260
+					LINE_4120();
+					continue line_1270;
+				} else if(A+1==3) {
+					//2330
+					if(D.get(3) >= 0) {
+						PRINT_USING_2350(Q1,Q2);
+						PRINT_USING_2520();
+						for(I=Q1-1; I<=Q1+1; ++I) {
+							N.setAllTo(0);
+							for(J=Q2-1; J<=Q2+1; ++J) {
+								if(I<1 || I>8 || J<1 || J>8) {
+									continue;
+								} else  {
+									N.set(J-Q2+2, G.get(I,J));
+									if(D.get(7)<0) {
+										continue;
+									} else {
+										Z.set(I, J, G.get(I,J));
+									}
+								}
+							}
+							//2470
+							PRINT_USING_2510(N.get(1), N.get(2), N.get(3));
+							PRINT_USING_2520();
+						}
+						continue line_1270;
+					} else {
+						PRINT("LONG RANGE SENSORS ARE INOPERABLE");
+						continue line_1270;
+					}
+				} else if(A+1==4) {
+					//2530
+					if(K3<=0) {
+						//3670
+						PRINT("SHORT RANGE SENSORS REPORT NO KLINGONS IN THIS QUADRANT");
+						continue line_1270;
+					} else {
+						if (D.get(4) >= 0) {
+							line_2570: while(true) {
+								if(D.get(7) >= 0 ) {
+									//-->2590
+								} else {
+									PRINT(" COMPUTER FAILURE HAMPERS ACCURACY");
+								}
+								//2590
+								PRINT("PHASERS LOCKED ON TARGET.  ENERGY AVAILABLE="+E);
+								PRINT("NUMBER OF UNITS TO FIRE:");
+								X_int=INPUT_int();
+								if(X_int<=0)
+									continue line_1270;
+								if(E-X_int<0) {
+									continue line_2570;
+								}
+								break line_2570;
+							}
+							E=E-X_int;
+							LINE_3790();
+							if(D.get(7)>=0) {
+								//-->2680
+							} else {
+								X=X_int*RND();
+							}
+							//2680
+							for(I=1; I<=3; ++I) {
+								if(K.get(I,3) <= 0) {
+									continue;
+								} else {
+									H=(X/K3/FND())*(2*RND());
+									K.set(I,3, (int)(K.get(I,3)-H));
+									PRINT_USING_2730(H,K.get(I,1), K.get(I,2), K.get(I,3));
+									if(K.get(I, 3)>0) {
+										continue;
+									} else {
+										LINE_3690();
+										if(K9 <= 0) {
+											LINE_4040();;
+											throw new RuntimeException("unreachable line reached");
+										} else {
+											continue;
+										}
+									}
+								}
+							}
+							if(E<0) {
+								LINE_4000();
+								throw new RuntimeException("unreachable line reached");
+							} else {
+								continue line_1270;
+							}
+						} else {
+							PRINT("PHASER CONTROL IS DISABLED");
+							continue line_1270;
+						}
+					}
+				} else if(A+1==5) {
+					//2800
+					
+				} else if(A+1==6) {
+					//3460
+				} else if(A+1==7) {
+					//3560
+				} else if(A+1==8) {
+					//4630
+				} else {
+					PRINT();
+					PRINT("   0 = SET COURSE");
+					PRINT("   1 = SHORT RANGE SENSOR SCAN");
+					PRINT("   2 = LONG RANGE SENSOR SCAN");
+					PRINT("   3 = FIRE PHASERS");
+					PRINT("   4 = FIRE PHOTON TORPEDOES");
+					PRINT("   5 = SHIELD CONTROL");
+					PRINT("   6 = DAMAGE CONTROL REPORT");
+					PRINT("   7 = CALL ON LIBRARY COMPUTER");
+					PRINT();
+				}
+			}
 		}
 	};
+	private double FND() {
+		double x1 = K.get(I,1)-S1;
+		double x2 = K.get(I,2)-S2;
+		return Math.sqrt(x1*x1 + x2*x2);
+	}
+	private void LINE_3690() {
+		PRINT_USING_3700(K.get(I,1), K.get(I,2));
+		K3=K3-1;
+		K9=K9-1;
+		A$.set("   ");
+		Z1=K.get(I,1);
+		Z1=K.get(I,1);
+		LINE_5510();
+		G.set(Q1, Q2, K3*100+B3*10+S3);
+	}
+	private void LINE_3790() {
+		if(!"DOCKED".equals(C$)) {
+			//3820
+			if(K3<=0) {
+				return;
+			} else {
+				for(I=1; I<=3; ++I) {
+					if(K.get(I, 3)<=0) {
+						continue;
+					} else {
+						H=(K.get(I, 3)/FND())*(2*RND());
+						S=S-(int)H;
+						PRINT_USING_3880(H,K.get(I,1),K.get(I,2),S);
+						if(S<0) {
+							LINE_4000();
+						} else {
+							continue;
+						}
+					}
+				}
+				return;
+			}
+		} else {
+			PRINT("STAR BASE SHIELDS PROTECT THE ENTERPRISE");
+		}
+	};
+	private void LINE_3920() {
+		PRINT("THE ENTERPRISE IS DEAD IN SPACE.  IF YOU SURVIVE ALL IMPENDING");
+		PRINT("ATTACK YOU WILL BE DEMOTED TO THE RANK OF PRIVATE");
+		line_3940: while(true) {
+			if(K3<=0) {
+				LINE_4020();
+				throw new RuntimeException("unreachable line reached");
+			} else {
+				LINE_3790();
+			}
+			continue line_3940;
+		}
+	}
+	private void LINE_3970() {
+		PRINT();
+		PRINT("IT IS STARDATE "+T);
+		LINE_4020();
+		throw new RuntimeException("unreachable line reached");
+	}
+	private void LINE_4000() {
+		PRINT();
+		PRINT("THE ENTERPRISE HAS BEEN DESTROYED.  THE FEDERATION WILL BE CONQUERED");
+		LINE_4020();
+		throw new RuntimeException("unreachable line reached");
+	};
+	private void LINE_4020() {
+		PRINT("THERE ARE STILL "+K9+" KLINGON BATTLE CRUISERS");
+		GOTO_230();
+		throw new RuntimeException("unreachable line reached");
+	};
+	private void LINE_4040() {
+		PRINT();
+		PRINT("THE LAST KLINGON BATTLE CRUISER IN THE GALAXY HAS BEEN DESTROYED");
+		PRINT("THE FEDERATION HAS BEEN SAVED !!!");
+		PRINT();
+		PRINT("YOUR EFFICIENCY RATING = "+((K7/(T-T0))*1000));
+		T1=TIM0()+TIM1()*60;
+		PRINT("YOUR ACTUAL TIME OF MISSION = "+INT((((T1-T7)*.4)-T7)*100)+" MINUTES ");
+		GOTO_230();
+		throw new RuntimeException("unreachable line reached");
+	};
+	private void GOTO_230() {
+		throw new ExeceptionalGOTO(LINE_230);
+	}
 	private void LINE_4120() {
 			for(I=S1-1; I<=S1+1; ++I) {
 				for(J=S1-1; J<=S1+1; ++J) {
@@ -391,8 +765,15 @@ public class StarTrek {
 	private void trace(Object msg) {
 		System.out.println(msg);
 	}
+	private void LINE_5610() {
+		S8=(int)(R1*12-11);
+		if(S8>72) {
+			PRINT(E$.slice(S8-72, S8-61));
+		} else {
+			PRINT(D$.slice(S8,S8+11));
+		}
+	}
 	private void LINE_5680() {
-		trace("z1_double="+Z1_double);
 		trace("z2_double="+Z2_double);
 			Z1=INT(Z1_double+.5);
 			Z2=INT(Z2_double+.5);
@@ -489,7 +870,13 @@ public class StarTrek {
 	private String INPUT() {
 		return new Scanner(System.in).nextLine();
 	}
-
+	private int INPUT_int() {
+		try {
+			return Integer.valueOf(INPUT());
+		} catch(NumberFormatException e) {
+			return -1;
+		}
+	}
 	protected int TIM1() {
 		return new Date().getMinutes();
 	}
@@ -502,12 +889,8 @@ public class StarTrek {
 		return new Random().nextDouble();
 	}
 
-	private void PRINT(String text) {
+	private void PRINT(Object text) {
 		System.out.println(text);
-	}
-
-	private void GOSUB(Runnable runnable) {
-		runnable.run();
 	}
 
 	private void GOTO(Runnable runnable) {
@@ -517,8 +900,26 @@ public class StarTrek {
 	private void PRINT() {
 		System.out.println();
 	}
+	private void PRINT_USING_2350(int q1, int q2) {
+		System.out.printf("LONG RANGE SENSOR SCAN FOR QUADRANT %s,%s\n", q1, q2);
+	}
+	private void PRINT_USING_2510(int n1, int n2, int n3) {
+		System.out.printf(": %s :%s :%s\n", n1, n2, n3);
+	}
+	private void PRINT_USING_2520() {
+		System.out.printf("-----------------\n");
+	}
+	private void PRINT_USING_2730(double hit, Integer s1, Integer s2, Integer left) {
+		System.out.printf("%s UNIT HIT ON KLINGON AT SECTOR %s,%s   (%s LEFT)\n", hit, s1, s2, left);
+	}
+	private void PRINT_USING_3700(double s1, double s2) {
+		System.out.printf("KLINGON AT SECTOR ",D,",",D," DESTROYED ****\n", s1, s2);
+	}
+	private void PRINT_USING_3880(double hit, int s1, int s2, int left) {
+		System.out.printf("%s UNIT HIT ON ENTERPRISE AT SECTOR %s,%s   (%s LEFT)\n", hit, s1, s2, left);
+	}
 	private void PRINT_USING_4550(STRING s1, STRING s2, STRING s3, STRING s4, STRING s5, STRING s6, STRING s7, STRING s8) {
-		System.out.printf(" %s %s %s %s %s %s %s %s", s1, s2, s3, s4, s5, s6, s7, s8);
+		System.out.printf(" %s %s %s %s %s %s %s %s\n", s1, s2, s3, s4, s5, s6, s7, s8);
 	}
 	private void PRINT_USING_4560(STRING s1, STRING s2, STRING s3, STRING s4, STRING s5, STRING s6, STRING s7, STRING s8, int t) {
 		System.out.printf(" %s %s %s %s %s %s %s %s        STARDATE        %s\n", s1, s2, s3, s4, s5, s6, s7, s8, t);
@@ -540,6 +941,9 @@ public class StarTrek {
 	}
 	private void PRINT_USING_4620(STRING s1, STRING s2, STRING s3, STRING s4, STRING s5, STRING s6, STRING s7, STRING s8, int s) {
 		System.out.printf(" %s %s %s %s %s %s %s %s        SHIELDS        %s\n", s1, s2, s3, s4, s5, s6, s7, s8, s);
+	}
+	private void PRINT_USING_5370(int s1, int s2) {
+		System.out.printf(" WARP ENGINES SHUTDOWN AT SECTOR %s,%s DUE TO BAD NAVIGATION\n", s1, s2);
 	}
 	private int INT(double d) {
 		return (int) Math.floor(d);
