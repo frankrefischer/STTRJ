@@ -45,7 +45,7 @@ public class StarTrek {
 
 	private double X, Y;
 
-	private int X_int;
+	private int X_int, Y_int;
 	
 	private int Z1, Z2, Z3;
 	private double Z1_double, Z2_double;
@@ -451,7 +451,7 @@ public class StarTrek {
 									} else {
 										LINE_3690();
 										if(K9 <= 0) {
-											LINE_4040();;
+											LINE_4040();
 											throw new RuntimeException("unreachable line reached");
 										} else {
 											continue;
@@ -472,7 +472,83 @@ public class StarTrek {
 					}
 				} else if(A+1==5) {
 					//2800
-					
+					if(D.get(5)>=0)
+						;
+					else {
+						PRINT("PHOTON TUBES ARE NOT OPERATIONAL");
+						continue line_1270;
+					}
+					//2830
+					if(P>0)
+						;
+					else {
+						PRINT("ALL PHOTON TORPEDOES EXPENDED");
+						continue line_1270;
+					}
+					line_2860: while(true) {
+						PRINT("TORPEDO COURSE (1-9):");
+						C1=INPUT_int();
+						if(C1==0)
+							continue line_1270;
+						if(C1<1 || C1>=9)
+							continue line_2860;
+						break;
+					}
+					C2=INT(C1);
+					X1=C.get(C2,1)+(C.get(C2+1,1)-C.get(C2,1)*(C1-C2));
+					X2=C.get(C2,2)+(C.get(C2+1,2)-C.get(C2,2)*(C1-C2));
+					X_int=S1;
+					Y_int=S2;
+					P=P-1;
+					PRINT("TORPEDO TRACK:");
+					line_2960: while(true) {						
+						X_int=X_int+X1;
+						Y_int=Y_int+X2;
+						if(X_int<.5 || X_int>=8.5 || Y_int<.5 || Y_int >= 8.5 ) {
+							//-->3420
+							LINE_3420();
+							continue line_1270;
+						}
+						PRINT_USING_3000(X,Y);
+						A$.set("   ");
+						Z1=X_int;
+						Z2=Y_int;
+						LINE_5680();
+						if(Z3==0)
+							;
+						else
+							continue line_2960;
+						//3070
+						A$.set("+++");
+						Z1=X_int;
+						Z2=Y_int;
+						LINE_5680();
+						if(Z3==0) {
+							//3220
+							A$.set(" * ");
+							Z1=X_int;
+							Z2=Y_int;
+							LINE_5680();
+							if(Z3==0)
+								;
+							else {
+								PRINT("YOU CAN'T DESTROY STARS SILLY");
+								LINE_3420();
+								continue line_1270;
+							}
+							//3290
+							A$.set(">!<");
+							Z1=X_int;
+							Z2=Y_int;
+							LINE_5680();
+							if(Z3==0) 
+								continue line_2960;
+							LINE_3340();
+							continue line_1270;
+						}
+						LINE_3120();
+						continue line_1270;
+					}
 				} else if(A+1==6) {
 					//3460
 				} else if(A+1==7) {
@@ -494,6 +570,54 @@ public class StarTrek {
 			}
 		}
 	};
+	private void LINE_3120() {
+		PRINT("*** KLINGON DESTROYED ***");
+		K3=K3-1;
+		K9=K9-1;
+		if(K9 <= 0) {
+			LINE_4040();
+			throw new RuntimeException("unreachable line reached");
+		}
+		//3160
+		for(I=1; I<=3; ++I) {
+			if(INT(X+.5) != K.get(I,1))
+				continue;
+			if(INT(Y+.5) == K.get(I,2))
+				break;
+		}
+		//3200
+		K.set(I,3,0);
+		//3360
+		A$.set("   ");
+		Z1=INT(X+.5);
+		Z2=INT(Y+.5);
+		LINE_5510();
+		G.set(Q1,Q2, K3*100+B3*10+S3);
+		LINE_3430();
+	};
+	private void LINE_3340() {
+		PRINT("*** STAR BASE DESTROYED ***  .......CONGRATULATIONS");
+		B3=B3-1;
+		A$.set("   ");
+		Z1=INT(X+.5);
+		Z2=INT(Y+.5);
+		LINE_5510();
+		G.set(Q1,Q2, K3*100+B3*10+S3);
+		LINE_3430();
+	};
+	private void LINE_3420() {
+		PRINT("TORPEDO MISSED");
+		LINE_3430();
+		throw new RuntimeException("unreachable line reached");
+	}
+	private void LINE_3430() {
+		LINE_3790();
+		if(E<0) {
+			LINE_4000();
+			throw new RuntimeException("unreachable line reached");
+		}
+		
+	}
 	private double FND() {
 		double x1 = K.get(I,1)-S1;
 		double x2 = K.get(I,2)-S2;
@@ -911,6 +1035,9 @@ public class StarTrek {
 	}
 	private void PRINT_USING_2730(double hit, Integer s1, Integer s2, Integer left) {
 		System.out.printf("%s UNIT HIT ON KLINGON AT SECTOR %s,%s   (%s LEFT)\n", hit, s1, s2, left);
+	}
+	private void PRINT_USING_3000(double x, double y) {
+		System.out.printf("               %s,%s\n", x, y);
 	}
 	private void PRINT_USING_3700(double s1, double s2) {
 		System.out.printf("KLINGON AT SECTOR ",D,",",D," DESTROYED ****\n", s1, s2);
