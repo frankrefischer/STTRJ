@@ -17,5 +17,8 @@ public class GOTO implements Statement {
 	public void execute() {
 		HPBasicProgram.nextLineNumber = lineNumber;
 	}
-
+	@Override
+	public String toString() {
+		return "GOTO " + lineNumber;
+	}
 }

@@ -29,10 +29,10 @@ public class ArrayVariable {
 		return array.elementAt(index(i,j));
 	}
 	public ArrayPlace at(Number i, Number j) {
-		return at(new NUMBER(i), new NUMBER(j));
+		return at(new CONST(i), new CONST(j));
 	}
 	public ArrayPlace at(NumericExpression i, Number j) {
-		return at(i, new NUMBER(j));
+		return at(i, new CONST(j));
 	}
 	public ArrayPlace at(NumericExpression i, NumericExpression j) {
 		return new ArrayPlace(this, i, j);

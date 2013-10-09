@@ -1,6 +1,6 @@
 package startrekj.hpbasic.statements;
 
-import startrekj.hpbasic.NUMBER;
+import startrekj.hpbasic.CONST;
 import startrekj.hpbasic.NumericExpression;
 import startrekj.hpbasic.NumericVariable;
 import startrekj.hpbasic.Statement;
@@ -15,7 +15,7 @@ public class SET_NumericVariable implements Statement, NumericExpression {
 	}
 	
 	public static SET_NumericVariable SET(NumericVariable variable, int number) {
-		return new SET_NumericVariable(variable, new NUMBER(number));
+		return new SET_NumericVariable(variable, new CONST(number));
 	}
 	public static SET_NumericVariable SET(NumericVariable variable, NumericExpression expression) {
 		return new SET_NumericVariable(variable, expression);

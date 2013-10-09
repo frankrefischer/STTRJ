@@ -1,6 +1,6 @@
 package startrekj.hpbasic;
 
-public class StringVariable {
+public class StringVariable implements StringExpression {
 	private String name;
 	StringBuilder value = new StringBuilder();
 	
@@ -36,6 +36,15 @@ public class StringVariable {
 
 	public void replace(int from, int to, String value) {
 		this.value.replace(from-1, to, value);
+	}
+
+	public String evaluate() {
+		return value.toString();
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

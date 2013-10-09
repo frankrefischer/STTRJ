@@ -1,9 +1,9 @@
 package startrekj.hpbasic;
 
 
-public class NUMBER implements NumericExpression {
+public class CONST implements NumericExpression {
 	private Number number;
-	public NUMBER(Number number) {
+	public CONST(Number number) {
 		this.number = number;
 	}
 	public Number evaluate() {

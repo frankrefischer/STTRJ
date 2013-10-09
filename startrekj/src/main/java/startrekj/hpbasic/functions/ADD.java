@@ -1,6 +1,6 @@
 package startrekj.hpbasic.functions;
 
-import startrekj.hpbasic.NUMBER;
+import startrekj.hpbasic.CONST;
 import startrekj.hpbasic.NumericExpression;
 
 import static startrekj.hpbasic.Arithmetic.*;
@@ -16,7 +16,7 @@ public class ADD implements NumericExpression {
 		return new ADD(operand1, operand2);
 	}
 	public static ADD ADD(NumericExpression operand1, Number operand2) {
-		return new ADD(operand1, new NUMBER(operand2));
+		return new ADD(operand1, new CONST(operand2));
 	}
 	public Number evaluate() {
 		return add(operand1.evaluate(), operand2.evaluate());

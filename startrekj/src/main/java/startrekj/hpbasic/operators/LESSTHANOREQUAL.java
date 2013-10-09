@@ -1,7 +1,7 @@
 package startrekj.hpbasic.operators;
 
 import startrekj.hpbasic.BooleanExpression;
-import startrekj.hpbasic.NUMBER;
+import startrekj.hpbasic.CONST;
 import startrekj.hpbasic.NumericExpression;
 
 import static startrekj.hpbasic.Arithmetic.*;
@@ -16,7 +16,7 @@ public class LESSTHANOREQUAL implements BooleanExpression {
 	}
 	
 	public static LESSTHANOREQUAL LESSTHANOREQUAL(NumericExpression expression1, Number number) {
-		return LESSTHANOREQUAL(expression1, new NUMBER(number));
+		return LESSTHANOREQUAL(expression1, new CONST(number));
 	}
 	public static LESSTHANOREQUAL LESSTHANOREQUAL(NumericExpression expression1, NumericExpression expression2) {
 		return new LESSTHANOREQUAL(expression1, expression2);

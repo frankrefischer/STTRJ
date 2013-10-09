@@ -1,24 +1,33 @@
 package startrekj.hpbasic.operators;
 
-import startrekj.hpbasic.StringVariable;
+import startrekj.hpbasic.CONST;
+import startrekj.hpbasic.NumericExpression;
+import startrekj.hpbasic.StringExpression;
 
-public class SUBSTRING {
-	private StringVariable variable;
-	private int from;
-	private int to;
+public class SUBSTRING implements StringExpression {
+	private StringExpression expression;
+	private NumericExpression from;
+	private NumericExpression to;
 	
-	private SUBSTRING(StringVariable variable, int from, int to) {
-		this.variable = variable;
+	private SUBSTRING(StringExpression expression, NumericExpression from, NumericExpression to) {
+		this.expression = expression;
 		this.from = from;
 		this.to = to;
 	}
 	
-	public static SUBSTRING SUBSTRING(StringVariable variable, int from, int to) {
-		return new SUBSTRING(variable, from, to);
+	public static SUBSTRING SUBSTRING(StringExpression expression, Number from, Number to) {
+		return new SUBSTRING(expression, new CONST(from), new CONST(to));
+	}
+	public static SUBSTRING SUBSTRING(StringExpression expression, NumericExpression from, NumericExpression to) {
+		return new SUBSTRING(expression, from, to);
 	}
 	
 	@Override
 	public String toString() {
-		return variable.getName() + "[" + from + "," + to + "]";
+		return expression + "[" + from + "," + to + "]";
+	}
+
+	public String evaluate() {
+		return expression.evaluate().substring(from.evaluate().intValue()-1, to.evaluate().intValue());
 	}
 }

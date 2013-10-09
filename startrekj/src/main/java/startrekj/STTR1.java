@@ -67,6 +67,7 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable Q2 = new NumericVariable("Q2");
 	static NumericVariable S = new NumericVariable("S");
 	static NumericVariable R1 = new NumericVariable("R1");
+	static NumericVariable R2 = new NumericVariable("R2");
 	static NumericVariable S1 = new NumericVariable("S1");
 	static NumericVariable S2 = new NumericVariable("S2");
 	static NumericVariable S3 = new NumericVariable("S3");
@@ -79,6 +80,7 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable X = new NumericVariable("X");
 	static NumericVariable Z1 = new NumericVariable("Z1");
 	static NumericVariable Z2 = new NumericVariable("Z2");
+	static NumericVariable Z3 = new NumericVariable("Z3");
 
 	static StringVariable A$ = new StringVariable("A$");
 	static StringVariable C$ = new StringVariable("C$");
@@ -146,7 +148,7 @@ public class STTR1 extends HPBasicProgram {
 		);
 		addLines(
 			line(5460, REM()),
-			line(5460, FOR(I, 1, 11)),
+			line(5460, FOR(I).FROM(1).TO(11)),
 			line(5470, PRINT("")),
 			line(5480, NEXT(I)),
 			line(5490, PRINT()),
@@ -198,8 +200,8 @@ public class STTR1 extends HPBasicProgram {
 			line(470, SET(D$, 49, "PHOTON TUBESDAMAGE CNTRL")),
 			line(480, SET(E$, "SHIELD CNTRLCOMPUTER")),
 			line(490, SET(B9, SET(K9, 0))),
-			line(500, FOR(I,1,8)),
-			line(510, FOR(J,1,8)),
+			line(500, FOR(I).FROM(1).TO(8)),
+			line(510, FOR(J).FROM(1).TO(8)),
 			line(520, SET(R1, RND())),
 			line(530, IF(GREATERTHAN(R1,.98)).THEN(580)),
 			line(540, IF(GREATERTHAN(R1,.95)).THEN(610)),
@@ -239,7 +241,7 @@ public class STTR1 extends HPBasicProgram {
 			line(890, PRINT("COMBAT AREA      CONDITION RED")),
 			line(900, PRINT("   SHIELDS DANGEROUSLY LOW")),
 			line(910, MAT(K,0)),
-			line(920, FOR(I,1,3)),
+			line(920, FOR(I).FROM(1).TO(3)),
 			line(930, SET(K.at(I,3)).to(0)),
 			line(940, NEXT(I)),
 			line(950, SET(Q$,Z$)),
@@ -249,7 +251,38 @@ public class STTR1 extends HPBasicProgram {
 			line(990, SET(Z1,S1)),
 			line(1000, SET(Z2,S2)),
 			line(1010, GOSUB(5510)),
-			line(1100, EXIT())
+			line(1020, FOR(I).FROM(1).TO(K3)),
+			line(1030, GOSUB(5380)),
+			line(1110, NEXT(I)),
+			line(1200, EXIT())
+				);
+		addLines(
+			line(5380, SET(R1, INT(ADD(MULT(RND(),8),1)))),
+			line(5390, SET(R2, INT(ADD(MULT(RND(),8),1)))),
+			line(5400, SET(A$,"   ")),
+			line(5410, SET(Z1,R1)),
+			line(5410, SET(Z2,R2)),
+			line(5430, GOSUB(5680)),
+			line(5440, IF(EQUAL(Z3,0)).THEN(5380)),
+			line(5450, RETURN())
+				);
+		addLines(
+			line(5680, REM("*******  STRING COMPARISON IN QUADRANT ARRAY **********")),
+			line(5683, SET(Z1,INT(ADD(Z1,.5)))),
+			line(5686, SET(Z2,INT(ADD(Z2,.5)))),
+			line(5690, SET(S8,SUBTRACT(ADD(MULT(Z1,24),MULT(Z2,3)),26))),
+			line(5700, SET(Z3,0)),
+			line(5710, IF(GREATERTHAN(S8,72)).THEN(5750)),
+			line(5720, IF(NOTEQUAL(SUBSTRING(Q$,S8,ADD(S8,2)),A$)).THEN(5810)),
+			line(5730, SET(Z3,1)),
+			line(5740, GOTO(5810)),
+			line(5750, IF(GREATERTHAN(S8,144)).THEN(5790)),
+			line(5760, IF(NOTEQUAL(SUBSTRING(R$,SUBTRACT(S8,72),SUBTRACT(S8,70)),A$)).THEN(5810)),
+			line(5770, SET(Z3,1)),
+			line(5780, GOTO(5810)),
+			line(5790, IF(NOTEQUAL(SUBSTRING(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)),A$)).THEN(5810)),
+			line(5800, SET(Z3,1)),
+			line(5810, RETURN())
 				);
 		addLines(
 			line(5510, REM("REM ******  INSERTION IN STRING ARRAY FOR QUADRANT ******")),

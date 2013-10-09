@@ -1,7 +1,7 @@
 package startrekj.hpbasic.operators;
 
 import startrekj.hpbasic.BooleanExpression;
-import startrekj.hpbasic.NUMBER;
+import startrekj.hpbasic.CONST;
 import startrekj.hpbasic.NumericExpression;
 
 import static startrekj.hpbasic.Arithmetic.*;
@@ -16,7 +16,7 @@ public class GREATERTHAN implements BooleanExpression {
 	}
 	
 	public static GREATERTHAN GREATERTHAN(NumericExpression expression1, Number number) {
-		return GREATERTHAN(expression1, new NUMBER(number));
+		return GREATERTHAN(expression1, new CONST(number));
 	}
 	public static GREATERTHAN GREATERTHAN(NumericExpression expression1, NumericExpression expression2) {
 		return new GREATERTHAN(expression1, expression2);
