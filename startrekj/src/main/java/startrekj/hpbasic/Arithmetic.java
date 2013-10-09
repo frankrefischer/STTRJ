@@ -24,6 +24,11 @@ public final class Arithmetic {
 			return number.intValue() > otherNumber.intValue();
 		return number.doubleValue() > otherNumber.doubleValue();
 	}
+	public static boolean greaterThanOrEqual(Number number, Number otherNumber) {
+		if(bothIntegers(number, otherNumber))
+			return number.intValue() >= otherNumber.intValue();
+		return number.doubleValue() >= otherNumber.doubleValue();
+	}
 	public static boolean lessThan(Number number, Number otherNumber) {
 		if(bothIntegers(number, otherNumber))
 			return number.intValue() < otherNumber.intValue();

@@ -28,6 +28,9 @@ public class ArrayVariable {
 	public Number get(int i, int j) {
 		return array.elementAt(index(i,j));
 	}
+	public ArrayPlace at(Number i) {
+		return at(new CONST(i), new CONST(1));
+	}
 	public ArrayPlace at(Number i, Number j) {
 		return at(new CONST(i), new CONST(j));
 	}

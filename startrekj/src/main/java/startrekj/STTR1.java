@@ -14,6 +14,7 @@ import static startrekj.hpbasic.Arithmetic.*;
 
 import static startrekj.hpbasic.operators.EQUAL.*;
 import static startrekj.hpbasic.operators.GREATERTHAN.*;
+import static startrekj.hpbasic.operators.GREATERTHANOREQUAL.*;
 import static startrekj.hpbasic.operators.LESSTHAN.*;
 import static startrekj.hpbasic.operators.LESSTHANOREQUAL.*;
 import static startrekj.hpbasic.operators.NOTEQUAL_String.*;
@@ -31,10 +32,12 @@ import static startrekj.hpbasic.statements.FOR.*;
 import static startrekj.hpbasic.statements.GOSUB.*;
 import static startrekj.hpbasic.statements.GOTO.*;
 import static startrekj.hpbasic.statements.IF.*;
+import static startrekj.hpbasic.statements.IMAGE.*;
 import static startrekj.hpbasic.statements.INPUT.*;
 import static startrekj.hpbasic.statements.MAT.*;
 import static startrekj.hpbasic.statements.NEXT.*;
 import static startrekj.hpbasic.statements.PRINT.*;
+import static startrekj.hpbasic.statements.PRINT_USING.*;
 import static startrekj.hpbasic.statements.REM.*;
 import static startrekj.hpbasic.statements.REPLACE.*;
 import static startrekj.hpbasic.statements.RETURN.*;
@@ -223,7 +226,7 @@ public class STTR1 extends HPBasicProgram {
 			line(700, SET(B3,1)),
 			line(710, SET(B9,ADD(B9,1))),
 			line(720, SET(S3,INT(ADD(MULT(RND(),8),1)))),
-			line(730, SET(G.at(I,J)).to(ADD(ADD(MULT(K3,100),MULT(B3,100)),S3))),
+			line(730, SET(G.at(I,J)).TO(ADD(ADD(MULT(K3,100),MULT(B3,100)),S3))),
 			line(740, SET(Z.at(I,J)).to(0)),
 			line(750, NEXT(J)),
 			line(760, NEXT(I)),
@@ -253,9 +256,89 @@ public class STTR1 extends HPBasicProgram {
 			line(1010, GOSUB(5510)),
 			line(1020, FOR(I).FROM(1).TO(K3)),
 			line(1030, GOSUB(5380)),
+			line(1040, SET(A$,"+++")),
+			line(1050, SET(Z1,R1)),
+			line(1060, SET(Z2,R2)),
+			line(1070, GOSUB(5510)),
+			line(1080, SET(K.at(I,1)).TO(R1)),
+			line(1090, SET(K.at(I,2)).TO(R2)),
+			line(1100, SET(K.at(I,3)).TO(S9)),
 			line(1110, NEXT(I)),
-			line(1200, EXIT())
-				);
+			line(1120, FOR(I).FROM(1).TO(B3)),
+			line(1130, GOSUB(5380)),
+			line(1140, SET(A$,">!<")),
+			line(1150, SET(Z1,R1)),
+			line(1160, SET(Z2,R2)),
+			line(1170, GOSUB(5510)),
+			line(1180, NEXT(I)),
+			line(1190, FOR(I).FROM(1).TO(S3)),
+			line(1200, GOSUB(5380)),
+			line(1210, SET(A$," * ")),
+			line(1220, SET(Z1,R1)),
+			line(1230, SET(Z2,R2)),
+			line(1240, GOSUB(5510)),
+			line(1250, NEXT(I)),
+			line(1260, GOSUB(4120)),
+			line(1270, null),
+			line(1280, null),
+			line(1290, null),
+			line(1300, EXIT())
+		);
+		addLines(
+			line(4120, FOR(I).FROM(SUBTRACT(S1,1)).TO(ADD(S1,1))),
+			line(4130, FOR(J).FROM(SUBTRACT(S2,1)).TO(ADD(S2,1))),
+			line(4140, IF(OR(LESSTHAN(I,1),OR(GREATERTHAN(I,8),OR(LESSTHAN(J,1),GREATERTHAN(J,8))))).THEN(4200)),
+			line(4130, SET(A$,">!<")),
+			line(4160, SET(Z1,I)),
+			line(4170, SET(Z2,J)),
+			line(4180, GOSUB(5680)),
+			line(4190, IF(EQUAL(Z3,1)).THEN(4240)),
+			line(4200, NEXT(J)),
+			line(4210, NEXT(I)),
+			line(4220, SET(D0,0)),
+			line(4230, GOTO(4310)),
+			line(4240, SET(D0,1)),
+			line(4250, SET(D$, "DOCKED")),
+			line(4260, SET(E,3000)),
+			line(4270, SET(P,10)),
+			line(4280, PRINT("SHIELDS DROPPED FOR DOCKING PURPOSES")),
+			line(4290, SET(S,0)),
+			line(4300, GOTO(4380)),
+			line(4310, IF(GREATERTHAN(K3,0)).THEN(4350)),
+			line(4320, IF(LESSTHAN(E,MULT(E0,.1))).THEN(4370)),
+			line(4330, SET(C$,"GREEN")),
+			line(4340, GOTO(4380)),
+			line(4350, SET(C$,"RED")),
+			line(4360, GOTO(4380)),
+			line(4370, SET(C$,"YELLOW")),
+			line(4380, IF(GREATERTHANOREQUAL(D.at(2),0)).THEN(4430)),
+			line(4390, PRINT()),
+			line(4400, PRINT("*** SHORT RANGE SENSORS ARE OUT ***")),
+			line(4410, PRINT()),
+			line(4420, GOTO(4530)),
+			line(4430, PRINT_USING(4540)),
+			line(4440, null),
+			line(4450, null),
+			line(4460, null),
+			line(4470, null),
+			line(4480, null),
+			line(4490, null),
+			line(4500, null),
+			line(4510, null),
+			line(4520, null),
+			line(4530, RETURN())
+		);
+		addLines(
+			line(4540, IMAGE("---------------------------------")),
+			line(4550, IMAGE("8(X,3A)")),
+			line(4560, IMAGE("8(X,3A),8X,\"STARDATE\",8X,5D")),
+			line(4570, IMAGE("8(X,3A),8X,\"CONDITION\",8X,6A")),
+			line(4580, IMAGE("8(X,3A),8X,\"QUADRANT\",9X,D,\",\",D")),
+			line(4590, IMAGE("8(X,3A),8X,\"SECTOR\",11X,D,\",\",D")),
+			line(4600, IMAGE("8(X,3A),8X,\"ENERGY\",9X,6D")),
+			line(4610, IMAGE("8(X,3A),8X,\"PHOTON TORPEDOES\",3D")),
+			line(4620, IMAGE("8(X,3A),8X,\"SHIELDS\",8X,6D"))
+		);
 		addLines(
 			line(5380, SET(R1, INT(ADD(MULT(RND(),8),1)))),
 			line(5390, SET(R2, INT(ADD(MULT(RND(),8),1)))),
@@ -265,7 +348,7 @@ public class STTR1 extends HPBasicProgram {
 			line(5430, GOSUB(5680)),
 			line(5440, IF(EQUAL(Z3,0)).THEN(5380)),
 			line(5450, RETURN())
-				);
+		);
 		addLines(
 			line(5680, REM("*******  STRING COMPARISON IN QUADRANT ARRAY **********")),
 			line(5683, SET(Z1,INT(ADD(Z1,.5)))),
@@ -283,7 +366,7 @@ public class STTR1 extends HPBasicProgram {
 			line(5790, IF(NOTEQUAL(SUBSTRING(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)),A$)).THEN(5810)),
 			line(5800, SET(Z3,1)),
 			line(5810, RETURN())
-				);
+		);
 		addLines(
 			line(5510, REM("REM ******  INSERTION IN STRING ARRAY FOR QUADRANT ******")),
 			line(5520, SET(S8,SUBTRACT(ADD(MULT(Z1,24),MULT(Z2,3)),26) )),

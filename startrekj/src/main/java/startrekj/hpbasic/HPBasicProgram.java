@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import startrekj.hpbasic.statements.ExitException;
+import startrekj.hpbasic.statements.IMAGE;
 
 public class HPBasicProgram {
 
@@ -16,7 +17,7 @@ public class HPBasicProgram {
 
 	public static Map<String, Integer> lineNumberForLoopVariable = new HashMap<String, Integer>();
 	
-	ProgramLines lines = new ProgramLines();
+	public static ProgramLines lines = new ProgramLines();
 
 	protected void addLines(Line...lines) {
 		this.lines.add(lines);
@@ -59,5 +60,11 @@ public class HPBasicProgram {
 	@Override
 	public String toString() {
 		return lines.toString();
+	}
+
+	public static String getImageString(int lineNumber) {
+		Statement statement = HPBasicProgram.lines.getStatementAtLineNumber(lineNumber);
+		IMAGE image = (IMAGE) statement;
+		return image.getImageString();
 	}
 }
