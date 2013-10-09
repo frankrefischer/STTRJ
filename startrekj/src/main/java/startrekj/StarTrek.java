@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class StarTrek {
 	public static void main(String[] args) {
-		new StarTrek().run();
+				new StarTrek().run();
 	}
 
 	private STRING C$;
@@ -651,7 +652,7 @@ public class StarTrek {
 								}
 								C1=1;
 								if(ABS(A) <= ABS(X)) {
-									//5110
+									//-->5110
 								} else {
 									PRINT("DIRECTION = " + (C1+(((ABS(A)-ABS(X))+ABS(A))/ABS(A))));
 									//5240
@@ -662,13 +663,27 @@ public class StarTrek {
 								}
 							}
 							H8=0;
-							PRINT("DO YOU WANT TO USE THE CALCULATOR");
-							A$.set(INPUT());
-							if("YES".equals(A$)) {
-								//4970
-							} else {
-								//5280
+							line_5280: while(true) {
+								PRINT("DO YOU WANT TO USE THE CALCULATOR");
+								A$.set(INPUT());
+								if("YES".equals(A$)) {
+									break;
+								} else if ("NO".equals(A$)){
+									continue line_5280;
+								}
+								continue line_1270;
 							}
+							//4970
+							PRINT_USING_4980(Q1,Q2,S1,S2);
+							PRINT("SHIP'S & TARGET'S COORDINATES ARE");
+							C1=INPUT_int();
+							A=INPUT_int();
+							W1=INPUT_int();
+							X=INPUT_int();
+							//5010
+							X=X-A;
+							A=C1-W1;
+
 						}
 						PRINT("FUNCTIONS AVAILABLE FROM COMPUTER");
 						PRINT("   0 = CUMULATIVE GALACTIC RECORD");
@@ -969,11 +984,6 @@ public class StarTrek {
 				PRINT();
 			}
 	};
-//	private Runnable LINE_4380 = new Runnable() {
-//		public void run() {
-//			if (D.get(2) <= 0)
-//		}
-//	};
 	private void LINE_5380() {
 			do {
 				R1=INT(RND()*8+1);
@@ -1193,6 +1203,9 @@ public class StarTrek {
 	private void PRINT_USING_4750(int q1, int q2) {
 		System.out.printf("COMPUTER RECORD OF GALAXY FOR QUADRANT 5s,%s\n", q1, q2);
 	}
+	private void PRINT_USING_4980(int q1, int q2, int s1, int s2) {
+		System.out.printf("YOU ARE AT QUADRANT ( %s,%s )  SECTOR ( %s,%s )\n", q1, q2, s1, s2);
+	};
 	private void PRINT_USING_5330() {
 		System.out.printf("     1     2     3     4     5     6     7     8\n");
 	}
