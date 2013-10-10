@@ -47,4 +47,8 @@ public class StringVariable implements StringExpression {
 		return name;
 	}
 
+	public StringExpression chunk(int from, int to) {
+		return new StringChunk(this, from, to);
+	}
+
 }

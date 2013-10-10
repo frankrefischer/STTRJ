@@ -2,18 +2,19 @@ package startrekj.hpbasic.statements;
 
 import java.util.Scanner;
 
+import startrekj.hpbasic.NumericVariable;
 import startrekj.hpbasic.Statement;
 import startrekj.hpbasic.StringVariable;
 
 public class INPUT implements Statement {
 
-	private StringVariable variable;
+	private NumericVariable variable;
 
-	private INPUT(StringVariable variable) {
+	private INPUT(NumericVariable variable) {
 		this.variable = variable;
 	}
 
-	public static INPUT INPUT(StringVariable variable) {
+	public static INPUT INPUT(NumericVariable variable) {
 		return new INPUT(variable);
 	}
 	
@@ -23,7 +24,18 @@ public class INPUT implements Statement {
 	}
 
 	public void execute() {
-		String lineRead = new Scanner(System.in).nextLine();
-		variable.setValue(lineRead.trim());
+		while(true) {
+			try {
+				String lineRead = new Scanner(System.in).nextLine();
+				Number numberRead = Double.parseDouble(lineRead);
+				if(variable.evaluate() instanceof Integer)
+					variable.setValue(numberRead.intValue());
+				else
+					variable.setValue(numberRead);
+				return;
+			} catch (NumberFormatException e) {
+				System.out.println("error: not number");
+			}
+		}
 	}
 }

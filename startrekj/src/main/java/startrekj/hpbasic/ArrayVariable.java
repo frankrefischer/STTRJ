@@ -50,4 +50,15 @@ public class ArrayVariable {
 		for(int i = 0; i < array.size(); ++i)
 			array.set(i, value);
 	}
+	@Override
+	public String toString() {
+		StringBuilder out = new StringBuilder();
+		out.append(name).append("=[");
+		if(array.size() > 0)
+			out.append(array.get(0));
+		for(int i=1; i<array.size(); ++i)
+			out.append(",").append(array.get(i));
+		out.append("]");
+		return out.toString();
+	}
 }

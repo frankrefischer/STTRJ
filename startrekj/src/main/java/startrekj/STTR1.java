@@ -34,6 +34,7 @@ import static startrekj.hpbasic.statements.GOTO.*;
 import static startrekj.hpbasic.statements.IF.*;
 import static startrekj.hpbasic.statements.IMAGE.*;
 import static startrekj.hpbasic.statements.INPUT.*;
+import static startrekj.hpbasic.statements.INPUT_String.*;
 import static startrekj.hpbasic.statements.MAT.*;
 import static startrekj.hpbasic.statements.NEXT.*;
 import static startrekj.hpbasic.statements.PRINT.*;
@@ -53,6 +54,7 @@ import startrekj.hpbasic.statements.TRACE;
 
 public class STTR1 extends HPBasicProgram {
 	
+	static NumericVariable A = new NumericVariable("A");
 	static NumericVariable B3 = new NumericVariable("B3");
 	static NumericVariable B9 = new NumericVariable("B9");
 	static NumericVariable D0 = new NumericVariable("D0");
@@ -234,7 +236,10 @@ public class STTR1 extends HPBasicProgram {
 			line(775, IF(OR(LESSTHANOREQUAL(B9,0),LESSTHANOREQUAL(K9,0))).THEN(490)),
 			line(780, PRINT("YOU MUST DESTROY",K9, " KLINGONS IN",T9, " STARDATES WITH",B9," STARBASES")),
 			line(810, SET(K3, SET(B3, SET(S3, 0)))),
+line(811, PRINT("Q1=", Q1)),
+line(812, PRINT("Q2=", Q2)),
 			line(820, IF(OR(LESSTHAN(Q1,1),OR(GREATERTHAN(Q1,8),OR(LESSTHAN(Q2,1),GREATERTHAN(Q2,8))))).THEN(920)),
+line(821, PRINT("G=", G)),
 			line(830, SET(X,MULT(G.at(Q1,Q2),.1))),
 			line(840, SET(K3,INT(X))),
 			line(850, SET(B3,INT(MULT(SUBTRACT(X,K3),10)))),
@@ -254,12 +259,14 @@ public class STTR1 extends HPBasicProgram {
 			line(990, SET(Z1,S1)),
 			line(1000, SET(Z2,S2)),
 			line(1010, GOSUB(5510)),
+line(1011, PRINT("K3=", K3)),
 			line(1020, FOR(I).FROM(1).TO(K3)),
 			line(1030, GOSUB(5380)),
 			line(1040, SET(A$,"+++")),
 			line(1050, SET(Z1,R1)),
 			line(1060, SET(Z2,R2)),
 			line(1070, GOSUB(5510)),
+line(1071, PRINT("I=", I)),
 			line(1080, SET(K.at(I,1)).TO(R1)),
 			line(1090, SET(K.at(I,2)).TO(R2)),
 			line(1100, SET(K.at(I,3)).TO(S9)),
@@ -279,10 +286,42 @@ public class STTR1 extends HPBasicProgram {
 			line(1240, GOSUB(5510)),
 			line(1250, NEXT(I)),
 			line(1260, GOSUB(4120)),
-			line(1270, null),
-			line(1280, null),
-			line(1290, null),
+			line(1270, PRINT("COMMAND:")),
+			line(1280, INPUT(A)),
+			line(1290, GOTO(ADD(A,1)).OF(1410,1260,2330,2530,2800,3460,3560,4630)),
 			line(1300, EXIT())
+		);
+		addLines(
+			line(1410, PRINT("1410 NOT YET IMPLEMENTED")),
+			line(1411, EXIT())
+		);
+		addLines(
+			line(1260, PRINT("1260 NOT YET IMPLEMENTED")),
+			line(1262, EXIT())
+		);
+		addLines(
+			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
+			line(2331, EXIT())
+		);
+		addLines(
+			line(2530, PRINT("2530 NOT YET IMPLEMENTED")),
+			line(2531, EXIT())
+		);
+		addLines(
+			line(2800, PRINT("2800 NOT YET IMPLEMENTED")),
+			line(2801, EXIT())
+		);
+		addLines(
+			line(3460, PRINT("3460 NOT YET IMPLEMENTED")),
+			line(3461, EXIT())
+		);
+		addLines(
+			line(3560, PRINT("3560 NOT YET IMPLEMENTED")),
+			line(3561, EXIT())
+		);
+		addLines(
+			line(4630, PRINT("4630 NOT YET IMPLEMENTED")),
+			line(4631, EXIT())
 		);
 		addLines(
 			line(4120, FOR(I).FROM(SUBTRACT(S1,1)).TO(ADD(S1,1))),
@@ -317,15 +356,15 @@ public class STTR1 extends HPBasicProgram {
 			line(4410, PRINT()),
 			line(4420, GOTO(4530)),
 			line(4430, PRINT_USING(4540)),
-			line(4440, null),
-			line(4450, null),
-			line(4460, null),
-			line(4470, null),
-			line(4480, null),
-			line(4490, null),
-			line(4500, null),
-			line(4510, null),
-			line(4520, null),
+			line(4440, PRINT_USING(4550,Q$.chunk(1,3),Q$.chunk(4,6),Q$.chunk(7,9),Q$.chunk(10,12),Q$.chunk(13,15),Q$.chunk(16,18),Q$.chunk(19,21),Q$.chunk(22,24))),
+			line(4450, PRINT_USING(4560,Q$.chunk(25,27),Q$.chunk(28,30),Q$.chunk(31,33),Q$.chunk(34,36),Q$.chunk(37,39),Q$.chunk(40,42),Q$.chunk(43,45),Q$.chunk(46,48),T)),
+			line(4460, PRINT_USING(4570,Q$.chunk(49,51),Q$.chunk(52,54),Q$.chunk(55,57),Q$.chunk(58,60),Q$.chunk(61,63),Q$.chunk(64,66),Q$.chunk(67,69),Q$.chunk(70,72),C$)),
+			line(4470, PRINT_USING(4580,R$.chunk(1,3),R$.chunk(4,6),R$.chunk(7,9),R$.chunk(10,12),R$.chunk(13,15),R$.chunk(16,18),R$.chunk(19,21),R$.chunk(22,24),Q1,Q2)),
+			line(4480, PRINT_USING(4590,R$.chunk(25,27),R$.chunk(28,30),R$.chunk(31,33),R$.chunk(34,36),R$.chunk(37,39),R$.chunk(40,42),R$.chunk(43,45),R$.chunk(46,48),S1,S2)),
+			line(4490, PRINT_USING(4600,R$.chunk(49,51),R$.chunk(52,54),R$.chunk(55,57),R$.chunk(58,60),R$.chunk(61,63),R$.chunk(64,66),R$.chunk(67,69),R$.chunk(70,72),E)),
+			line(4500, PRINT_USING(4610,S$.chunk(1,3),S$.chunk(4,6),S$.chunk(7,9),S$.chunk(10,12),S$.chunk(13,15),S$.chunk(16,18),S$.chunk(19,21),S$.chunk(22,24),P)),
+			line(4510, PRINT_USING(4520,S$.chunk(25,27),S$.chunk(28,30),S$.chunk(31,33),S$.chunk(34,36),S$.chunk(37,39),S$.chunk(40,42),S$.chunk(43,45),S$.chunk(46,48),S)),
+			line(4520, PRINT_USING(4540)),
 			line(4530, RETURN())
 		);
 		addLines(
