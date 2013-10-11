@@ -62,9 +62,12 @@ public class HPBasicProgram {
 		return lines.toString();
 	}
 
-	public static String getImageString(int lineNumber) {
+	public static String getFormatString(int lineNumber) {
 		Statement statement = HPBasicProgram.lines.getStatementAtLineNumber(lineNumber);
-		IMAGE image = (IMAGE) statement;
-		return image.getImageString();
+		if (statement instanceof IMAGE ) {
+			IMAGE image = (IMAGE) statement;
+			return image.getFormatString();
+		}
+		throw new RuntimeException("statement at line " + lineNumber + " is not an image");
 	}
 }

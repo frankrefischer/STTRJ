@@ -29,9 +29,9 @@ public class PRINT_USING implements Statement {
 	}
 
 	public void execute() {
-		String imageString = HPBasicProgram.getImageString(lineNumber);
-		String formatString = getFormatString(imageString);
+		String formatString = HPBasicProgram.getFormatString(lineNumber);
 		System.out.printf(formatString, getEvaluatedParameters());
+		System.out.println();
 	}
 
 	private Object[] getEvaluatedParameters() {
@@ -52,9 +52,5 @@ public class PRINT_USING implements Statement {
 			return expression.evaluate();
 		}
 		return parameter;
-	}
-
-	private String getFormatString(String imageString) {
-		return imageString;
 	}
 }

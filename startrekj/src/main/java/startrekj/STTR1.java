@@ -274,20 +274,19 @@ public class STTR1 extends HPBasicProgram {
 			line(1220, SET(Z1,R1)),
 			line(1230, SET(Z2,R2)),
 			line(1240, GOSUB(5510)),
-			line(1250, NEXT(I)),
+			line(1250, NEXT(I))
+		);
+		addLines(
+line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(1260, GOSUB(4120)),
-			line(1270, PRINT("COMMAND:")),
-			line(1280, INPUT(A)),
-			line(1290, GOTO(ADD(A,1)).OF(1410,1260,2330,2530,2800,3460,3560,4630)),
+//			line(1270, PRINT("COMMAND:")),
+//			line(1280, INPUT(A)),
+//			line(1290, GOTO(ADD(A,1)).OF(1410,1260,2330,2530,2800,3460,3560,4630)),
 			line(1300, EXIT())
 		);
 		addLines(
 			line(1410, PRINT("1410 NOT YET IMPLEMENTED")),
 			line(1411, EXIT())
-		);
-		addLines(
-			line(1260, PRINT("1260 NOT YET IMPLEMENTED")),
-			line(1262, EXIT())
 		);
 		addLines(
 			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
@@ -317,7 +316,7 @@ public class STTR1 extends HPBasicProgram {
 			line(4120, FOR(I).FROM(SUBTRACT(S1,1)).TO(ADD(S1,1))),
 			line(4130, FOR(J).FROM(SUBTRACT(S2,1)).TO(ADD(S2,1))),
 			line(4140, IF(OR(LESSTHAN(I,1),OR(GREATERTHAN(I,8),OR(LESSTHAN(J,1),GREATERTHAN(J,8))))).THEN(4200)),
-			line(4130, SET(A$,">!<")),
+			line(4150, SET(A$,">!<")),
 			line(4160, SET(Z1,I)),
 			line(4170, SET(Z2,J)),
 			line(4180, GOSUB(5680)),
@@ -353,20 +352,20 @@ public class STTR1 extends HPBasicProgram {
 			line(4480, PRINT_USING(4590,R$.chunk(25,27),R$.chunk(28,30),R$.chunk(31,33),R$.chunk(34,36),R$.chunk(37,39),R$.chunk(40,42),R$.chunk(43,45),R$.chunk(46,48),S1,S2)),
 			line(4490, PRINT_USING(4600,R$.chunk(49,51),R$.chunk(52,54),R$.chunk(55,57),R$.chunk(58,60),R$.chunk(61,63),R$.chunk(64,66),R$.chunk(67,69),R$.chunk(70,72),E)),
 			line(4500, PRINT_USING(4610,S$.chunk(1,3),S$.chunk(4,6),S$.chunk(7,9),S$.chunk(10,12),S$.chunk(13,15),S$.chunk(16,18),S$.chunk(19,21),S$.chunk(22,24),P)),
-			line(4510, PRINT_USING(4520,S$.chunk(25,27),S$.chunk(28,30),S$.chunk(31,33),S$.chunk(34,36),S$.chunk(37,39),S$.chunk(40,42),S$.chunk(43,45),S$.chunk(46,48),S)),
+			line(4510, PRINT_USING(4620,S$.chunk(25,27),S$.chunk(28,30),S$.chunk(31,33),S$.chunk(34,36),S$.chunk(37,39),S$.chunk(40,42),S$.chunk(43,45),S$.chunk(46,48),S)),
 			line(4520, PRINT_USING(4540)),
 			line(4530, RETURN())
 		);
 		addLines(
-			line(4540, IMAGE("---------------------------------")),
-			line(4550, IMAGE("8(X,3A)")),
-			line(4560, IMAGE("8(X,3A),8X,\"STARDATE\",8X,5D")),
-			line(4570, IMAGE("8(X,3A),8X,\"CONDITION\",8X,6A")),
-			line(4580, IMAGE("8(X,3A),8X,\"QUADRANT\",9X,D,\",\",D")),
-			line(4590, IMAGE("8(X,3A),8X,\"SECTOR\",11X,D,\",\",D")),
-			line(4600, IMAGE("8(X,3A),8X,\"ENERGY\",9X,6D")),
-			line(4610, IMAGE("8(X,3A),8X,\"PHOTON TORPEDOES\",3D")),
-			line(4620, IMAGE("8(X,3A),8X,\"SHIELDS\",8X,6D"))
+			line(4540, IMAGE().STRING("---------------------------------")),
+			line(4550, IMAGE().FORMAT("8(X,3A)")),
+			line(4560, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("STARDATE").FORMAT("8X").FORMAT("5D")),
+			line(4570, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("CONDITION").FORMAT("8X").FORMAT("6A")),
+			line(4580, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("QUADRANT").FORMAT("9X").FORMAT("D").STRING(",").FORMAT("D")),
+			line(4590, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SECTOR").FORMAT("11X").FORMAT("D").STRING(",").FORMAT("D")),
+			line(4600, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("ENERGY").FORMAT("9X").FORMAT("6D")),
+			line(4610, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("PHOTON TORPEDOES").FORMAT("3D")),
+			line(4620, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SHIELDS").FORMAT("8X").FORMAT("6D"))
 		);
 		addLines(
 			line(5380, SET(R1, INT(ADD(MULT(RND(),8),1)))),
