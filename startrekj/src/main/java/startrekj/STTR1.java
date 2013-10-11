@@ -1,7 +1,6 @@
 package startrekj;
 
 import static startrekj.hpbasic.Line.*;
-
 import static startrekj.hpbasic.functions.ADD.*;
 import static startrekj.hpbasic.functions.INT.*;
 import static startrekj.hpbasic.functions.MULT.*;
@@ -9,9 +8,7 @@ import static startrekj.hpbasic.functions.RND.*;
 import static startrekj.hpbasic.functions.SQR.*;
 import static startrekj.hpbasic.functions.SUBTRACT.*;
 import static startrekj.hpbasic.functions.TIM.*;
-
 import static startrekj.hpbasic.Arithmetic.*;
-
 import static startrekj.hpbasic.operators.EQUAL.*;
 import static startrekj.hpbasic.operators.GREATERTHAN.*;
 import static startrekj.hpbasic.operators.GREATERTHANOREQUAL.*;
@@ -20,7 +17,6 @@ import static startrekj.hpbasic.operators.LESSTHANOREQUAL.*;
 import static startrekj.hpbasic.operators.NOTEQUAL_String.*;
 import static startrekj.hpbasic.operators.OR.*;
 import static startrekj.hpbasic.operators.SUBSTRING.*;
-
 import static startrekj.hpbasic.statements.SET_ArrayPlace.*;
 import static startrekj.hpbasic.statements.SET_StringVariable.*;
 import static startrekj.hpbasic.statements.SET_NumericVariable.*;
@@ -43,7 +39,6 @@ import static startrekj.hpbasic.statements.REM.*;
 import static startrekj.hpbasic.statements.REPLACE.*;
 import static startrekj.hpbasic.statements.RETURN.*;
 import static startrekj.hpbasic.statements.TRACE.*;
-
 import startrekj.hpbasic.ArrayVariable;
 import startrekj.hpbasic.FunctionVariable;
 import startrekj.hpbasic.HPBasicProgram;
@@ -162,7 +157,7 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(180, PRINT("                          STAR TREK ")),
 			line(190, PRINT("DO YOU WANT INSTRUCTIONS (THEY'RE LONG!)")),
-			line(200, INPUT(A$)),
+//			line(200, INPUT(A$)),
 			line(210, IF(NOTEQUAL(A$, "YES")).THEN(230)),
 			line(220, GOSUB(5820))
 		);
@@ -228,7 +223,7 @@ public class STTR1 extends HPBasicProgram {
 			line(700, SET(B3,1)),
 			line(710, SET(B9,ADD(B9,1))),
 			line(720, SET(S3,INT(ADD(MULT(RND(),8),1)))),
-			line(730, SET(G.at(I,J)).TO(ADD(ADD(MULT(K3,100),MULT(B3,100)),S3))),
+			line(730, SET(G.at(I,J)).TO(ADD(ADD(MULT(K3,100),MULT(B3,10)),S3))),
 			line(740, SET(Z.at(I,J)).to(0)),
 			line(750, NEXT(J)),
 			line(760, NEXT(I)),
@@ -236,11 +231,8 @@ public class STTR1 extends HPBasicProgram {
 			line(775, IF(OR(LESSTHANOREQUAL(B9,0),LESSTHANOREQUAL(K9,0))).THEN(490)),
 			line(780, PRINT("YOU MUST DESTROY",K9, " KLINGONS IN",T9, " STARDATES WITH",B9," STARBASES")),
 			line(810, SET(K3, SET(B3, SET(S3, 0)))),
-line(811, PRINT("Q1=", Q1)),
-line(812, PRINT("Q2=", Q2)),
 			line(820, IF(OR(LESSTHAN(Q1,1),OR(GREATERTHAN(Q1,8),OR(LESSTHAN(Q2,1),GREATERTHAN(Q2,8))))).THEN(920)),
-line(821, PRINT("G=", G)),
-			line(830, SET(X,MULT(G.at(Q1,Q2),.1))),
+			line(830, SET(X,MULT(G.at(Q1,Q2),.01))),
 			line(840, SET(K3,INT(X))),
 			line(850, SET(B3,INT(MULT(SUBTRACT(X,K3),10)))),
 			line(860, SET(S3,SUBTRACT(G.at(Q1,Q2),MULT(INT(MULT(G.at(Q1,Q2),.1)),10)))),
@@ -259,14 +251,12 @@ line(821, PRINT("G=", G)),
 			line(990, SET(Z1,S1)),
 			line(1000, SET(Z2,S2)),
 			line(1010, GOSUB(5510)),
-line(1011, PRINT("K3=", K3)),
 			line(1020, FOR(I).FROM(1).TO(K3)),
 			line(1030, GOSUB(5380)),
 			line(1040, SET(A$,"+++")),
 			line(1050, SET(Z1,R1)),
 			line(1060, SET(Z2,R2)),
 			line(1070, GOSUB(5510)),
-line(1071, PRINT("I=", I)),
 			line(1080, SET(K.at(I,1)).TO(R1)),
 			line(1090, SET(K.at(I,2)).TO(R2)),
 			line(1100, SET(K.at(I,3)).TO(S9)),

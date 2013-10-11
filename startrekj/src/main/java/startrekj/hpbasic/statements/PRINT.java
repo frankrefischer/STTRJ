@@ -1,5 +1,6 @@
 package startrekj.hpbasic.statements;
 
+import startrekj.hpbasic.NumericExpression;
 import startrekj.hpbasic.NumericVariable;
 import startrekj.hpbasic.Statement;
 
@@ -34,9 +35,9 @@ public class PRINT implements Statement {
 	}
 
 	private void print(Object part) {
-		if (part instanceof NumericVariable) {
-			NumericVariable variable = (NumericVariable) part;
-			System.out.print(" " + variable.getValue());
+		if (part instanceof NumericExpression) {
+			NumericExpression expression = (NumericExpression) part;
+			System.out.print(" " + expression.evaluate());
 		}
 		else
 			System.out.print(part);
