@@ -44,6 +44,16 @@ public final class Arithmetic {
 			return number.intValue() <= otherNumber.intValue();
 		return number.doubleValue() <= otherNumber.doubleValue();
 	}
+	public static boolean equal(Number number, Number otherNumber) {
+		if(bothIntegers(number, otherNumber))
+			return number.intValue() == otherNumber.intValue();
+		return number.doubleValue() == otherNumber.doubleValue();
+	}
+	public static boolean notEqual(Number number, Number otherNumber) {
+		if(bothIntegers(number, otherNumber))
+			return number.intValue() != otherNumber.intValue();
+		return number.doubleValue() != otherNumber.doubleValue();
+	}
 	public static boolean bothIntegers(Number number, Number otherNumber) {
 		return number instanceof Integer && otherNumber instanceof Integer;
 	}

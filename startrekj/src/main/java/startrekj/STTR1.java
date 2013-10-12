@@ -15,6 +15,7 @@ import static startrekj.hpbasic.operators.GREATERTHAN.*;
 import static startrekj.hpbasic.operators.GREATERTHANOREQUAL.*;
 import static startrekj.hpbasic.operators.LESSTHAN.*;
 import static startrekj.hpbasic.operators.LESSTHANOREQUAL.*;
+import static startrekj.hpbasic.operators.NOTEQUAL.*;
 import static startrekj.hpbasic.operators.NOTEQUAL_String.*;
 import static startrekj.hpbasic.operators.OR.*;
 import static startrekj.hpbasic.operators.SUBSTRING.*;
@@ -54,6 +55,7 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable B3 = new NumericVariable("B3");
 	static NumericVariable B9 = new NumericVariable("B9");
 	static NumericVariable C1 = new NumericVariable("C1");
+	static NumericVariable C2 = new NumericVariable("C2");
 	static NumericVariable D0 = new NumericVariable("D0");
 	static NumericVariable E = new NumericVariable("E");
 	static NumericVariable E0 = new NumericVariable("E0");
@@ -64,6 +66,7 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable K3 = new NumericVariable("K3");
 	static NumericVariable K7 = new NumericVariable("K7");
 	static NumericVariable K9 = new NumericVariable("K9");
+	static NumericVariable NN = new NumericVariable("NN");
 	static NumericVariable P = new NumericVariable("P");
 	static NumericVariable P0 = new NumericVariable("P0");
 	static NumericVariable Q1 = new NumericVariable("Q1");
@@ -82,6 +85,9 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable T9 = new NumericVariable("T9");
 	static NumericVariable W1 = new NumericVariable("W1");
 	static NumericVariable X = new NumericVariable("X");
+	static NumericVariable X1 = new NumericVariable("X1");
+	static NumericVariable X2 = new NumericVariable("X2");
+	static NumericVariable Y = new NumericVariable("Y");
 	static NumericVariable Z1 = new NumericVariable("Z1");
 	static NumericVariable Z2 = new NumericVariable("Z2");
 	static NumericVariable Z3 = new NumericVariable("Z3");
@@ -147,7 +153,6 @@ public class STTR1 extends HPBasicProgram {
 			line(160, REM("*****************************************************************"))
 		);
 		addLines(
-			line(169, TRACE(false)),
 			line(170, GOSUB(5460))
 		);
 		addLines(
@@ -281,7 +286,6 @@ public class STTR1 extends HPBasicProgram {
 			line(1250, NEXT(I))
 		);
 		addLines(
-line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(1260, GOSUB(4120)),
 			line(1270, PRINT("COMMAND:")),
 			line(1280, INPUT(A)),
@@ -328,8 +332,51 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(1680, SET(D.at(R1)).TO(SUBTRACT(D.at(R1),ADD(MULT(RND(),5),1)))),
 			line(1690, PRINT()),
 			line(1700, PRINT("DAMAGE CONTROL REPORT:")),
-			line(1701, PRINT("1410 NOT YET FULLY IMPLEMENTED")),
-			line(1702, GOTO(1270))
+			line(1710, GOSUB(5610)),
+			line(1720, PRINT("DAMAGED")),
+			line(1730, PRINT()),
+			line(1740, GOTO(1810)),
+			line(1750, SET(D.at(R1)).TO(ADD(D.at(R1),ADD(MULT(RND(),5),1)))),
+			line(1760, PRINT()),
+			line(1770, PRINT("DAMAGE CONTROL REPORT:")),
+			line(1780, GOSUB(5610)),
+			line(1790, PRINT(" STATE OF REPAIR IMPROVED")),
+			line(1800, PRINT()),
+			line(1810, SET(NN, MULT(W1,8))),
+			line(1820, SET(A$,"   ")),
+			line(1830, SET(Z1,S1)),
+			line(1840, SET(Z2,S2)),
+			line(1850, GOSUB(5510)),
+			line(1870, SET(X,S1)),
+			line(1880, SET(Y,S2)),
+			line(1885, SET(C2,INT(C1))),
+			line(1890, SET(X1,ADD(C.at(C2,1),MULT(SUBTRACT(C.at(ADD(C2,1),C.at(C2,1)),C.at(C2,1)),SUBTRACT(C1,C2))))),
+			line(1900, SET(X2,ADD(C.at(C2,2),MULT(SUBTRACT(C.at(ADD(C2,2),C.at(C2,2)),C.at(C2,2)),SUBTRACT(C1,C2))))),
+			line(1910, FOR(I).FROM(1).TO(NN)),
+			line(1920, SET(S1, ADD(S1,X1))),
+			line(1930, SET(S2, ADD(S2,X2))),
+			line(1940, IF(OR(LESSTHAN(S1,.5),OR(GREATERTHANOREQUAL(S1,8.5),OR(LESSTHAN(S2,.5),GREATERTHANOREQUAL(S2,8.5))))).THEN(2170)),
+			line(1950, SET(A$,"   ")),
+			line(1960, SET(Z1,S1)),
+			line(1970, SET(Z2,S2)),
+			line(1980, GOSUB(5680)),
+			line(1990, IF(NOTEQUAL(Z3,0)).THEN(2070)),
+			line(2030, PRINT_USING(5370, S1,S2)),
+			line(2040, SET(S1,SUBTRACT(S1,X1))),
+			line(2050, SET(S2,SUBTRACT(S2,X2))),
+			line(2060, GOTO(2080)),
+			line(2070, NEXT(I)),
+			line(2080, SET(A$,"<*>")),
+			line(2083, SET(S1, INT(ADD(S1,.5)))),
+			line(2086, SET(S2, INT(ADD(S2,.5)))),
+			line(2090, SET(Z1,S1)),
+			line(2100, SET(Z2,S2)),
+			line(2110, GOSUB(5510)),
+			line(2120, SET(E,ADD(SUBTRACT(E,NN),5))),
+			line(2130, IF(LESSTHAN(W1,1)).THEN(2150)),
+			line(2140, SET(T,ADD(T,1))),
+			line(2150, IF(GREATERTHAN(T,ADD(T0,T9))).THEN(3970)),
+			line(2160, GOTO(1260))
 		);
 		addLines(
 			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
@@ -352,6 +399,11 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(3550, GOTO(1270))
 		);
 		addLines(
+			line(3560, PRINT("3560 NOT YET IMPLEMENTED")),
+			line(3659, PRINT("3560 NOT YET FULLY IMPLEMENTED")),
+			line(3660, GOTO(1270))
+		);
+		addLines(
 			line(3790, IF(NOTEQUAL(C$,"DOCKED")).THEN(3820)),
 			line(3800, PRINT("STAR BASE SHIELDS PROTECT THE ENTERPRISE")),
 			line(3810, RETURN()),
@@ -366,7 +418,7 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(3900, NEXT(I)),
 			line(3910, RETURN())
 		);
-	addLines(
+		addLines(
 			line(3920, PRINT("THE ENTERPRISE IS DEAD IN SPACE.  IF YOU SURVIVE ALL IMPENDING")),
 			line(3930, PRINT("ATTACK YOU WILL BE DEMOTED TO THE RANK OF PRIVATE")),
 			line(3940, IF(LESSTHANOREQUAL(K3,0)).THEN(4020)),
@@ -374,9 +426,9 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(3960, GOTO(3940))
 		);
 		addLines(
-			line(3560, PRINT("3560 NOT YET IMPLEMENTED")),
-			line(3659, PRINT("3560 NOT YET FULLY IMPLEMENTED")),
-			line(3660, GOTO(1270))
+			line(3970, PRINT()),
+			line(3980, PRINT("IT IS STARDATE", T)),
+			line(3990, GOTO(4020))
 		);
 		addLines(
 			line(4000, PRINT()),
@@ -447,6 +499,13 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(4620, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SHIELDS").FORMAT("8X").FORMAT("6D"))
 		);
 		addLines(
+			line(5330, IMAGE().STRING("     1     2     3     4     5     6     7     8")),
+			line(5340, IMAGE().STRING("--------------------------------------------------")),
+			line(5350, IMAGE().FORMAT("D").FORMAT("8(3X,3D)")),
+			line(5360, IMAGE().STRING("   ----- ----- ----- ----- ----- ----- ----- -----")),
+			line(5370, IMAGE().STRING(" WARP ENGINES SHUTDOWN AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING( "DUE TO BAD NAVIGATION"))
+		);
+		addLines(
 			line(5380, SET(R1, INT(ADD(MULT(RND(),8),1)))),
 			line(5390, SET(R2, INT(ADD(MULT(RND(),8),1)))),
 			line(5400, SET(A$,"   ")),
@@ -455,6 +514,15 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(5430, GOSUB(5680)),
 			line(5440, IF(EQUAL(Z3,0)).THEN(5380)),
 			line(5450, RETURN())
+		);
+		addLines(
+			line(5610, REM("****  PRINTS DEVICE NAME FROM ARRAY ****")),
+			line(5620, SET(S8,SUBTRACT(MULT(R1,12),11))),
+			line(5630, IF(GREATERTHAN(S8,72)).THEN(5660)),
+			line(5640, PRINT(D$.chunk(S8, ADD(S8,11)))),
+			line(5650, GOTO(5670)),
+			line(5660, PRINT(E$.chunk(SUBTRACT(S8,72), SUBTRACT(S8,61)))),
+			line(5670, RETURN())
 		);
 		addLines(
 			line(5680, REM("*******  STRING COMPARISON IN QUADRANT ARRAY **********")),

@@ -11,7 +11,7 @@ public class HPBasicProgram {
 	public static Integer currentLineNumber;
 	public static Integer nextLineNumber;
 	
-	public static boolean isTraceOn = false;
+	public static boolean isTraceOn = true;
 
 	public static Map<String, Integer> maxValueForLoopVariable = new HashMap<String, Integer>();
 

@@ -46,8 +46,10 @@ public class StringVariable implements StringExpression {
 	public String toString() {
 		return name;
 	}
-
 	public StringExpression chunk(int from, int to) {
+		return chunk(new CONST(from), new CONST(to));
+	}
+	public StringExpression chunk(NumericExpression from, NumericExpression to) {
 		return new StringChunk(this, from, to);
 	}
 

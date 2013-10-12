@@ -21,7 +21,7 @@ public class EQUAL implements BooleanExpression {
 		return new EQUAL(expression1, expression2);
 	}
 	public boolean evaluate() {
-		return lessThan(expression1.evaluate(), expression2.evaluate());
+		return equal(expression1.evaluate(), expression2.evaluate());
 	}
 	@Override
 	public String toString() {

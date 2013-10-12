@@ -21,7 +21,6 @@ public class ProgramLines {
 		StringWriter sourceCode = new StringWriter();
 		PrintWriter out = new PrintWriter(sourceCode);
 		for(Integer lineNumber: lines.keySet()) {
-System.out.println("### " + lineNumber);
 			out.println(lineNumber + " " + getStatementAtLineNumber(lineNumber));
 		}
 		return sourceCode.toString();
