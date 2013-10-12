@@ -31,7 +31,12 @@ public class GOTO implements Statement {
 	}
 	
 	public void execute() {
-		HPBasicProgram.nextLineNumber = lineNumbers[expression.evaluate().intValue()-1];
+		int index = expression.evaluate().intValue()-1;
+		if(index < 0)
+			return;
+		if(index >= lineNumbers.length)
+			return;
+		HPBasicProgram.nextLineNumber = lineNumbers[index];
 	}
 	@Override
 	public String toString() {

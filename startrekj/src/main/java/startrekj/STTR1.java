@@ -157,7 +157,7 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(180, PRINT("                          STAR TREK ")),
 			line(190, PRINT("DO YOU WANT INSTRUCTIONS (THEY'RE LONG!)")),
-//			line(200, INPUT(A$)),
+			line(200, INPUT(A$)),
 			line(210, IF(NOTEQUAL(A$, "YES")).THEN(230)),
 			line(220, GOSUB(5820))
 		);
@@ -279,38 +279,54 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(1260, GOSUB(4120)),
-//			line(1270, PRINT("COMMAND:")),
-//			line(1280, INPUT(A)),
-//			line(1290, GOTO(ADD(A,1)).OF(1410,1260,2330,2530,2800,3460,3560,4630)),
-			line(1300, EXIT())
+			line(1270, PRINT("COMMAND:")),
+			line(1280, INPUT(A)),
+			line(1290, GOTO(ADD(A,1)).OF(1410,1260,2330,2530,2800,3460,3560,4630)),
+			line(1300, PRINT()),
+			line(1310, PRINT("   0 = SET COURSE")),
+			line(1320, PRINT("   1 = SHORT RANGE SENSOR SCAN")),
+			line(1330, PRINT("   2 = LONG RANGE SENSOR SCAN")),
+			line(1340, PRINT("   3 = FIRE PHASERS")),
+			line(1350, PRINT("   4 = FIRE PHOTON TORPEDOE")),
+			line(1360, PRINT("   5 = SHIELD CONTRO")),
+			line(1370, PRINT("   6 = DAMAGE CONTROL REPORT")),
+			line(1380, PRINT("   7 = CALL ON LIBRARY COMPUTE")),
+			line(1400, GOTO(1270))
 		);
 		addLines(
-			line(1410, PRINT("1410 NOT YET IMPLEMENTED")),
-			line(1411, EXIT())
+			line(1410, PRINT("COURSE (1-9):")),
+			line(1599, PRINT("1410 NOT YET FULLY IMPLEMENTED")),
+			line(1600, GOTO(1270))
 		);
 		addLines(
 			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
-			line(2331, EXIT())
+			line(2499, PRINT("2330 NOT YET FULLY IMPLEMENTED")),
+			line(2500, GOTO(1270))
 		);
 		addLines(
 			line(2530, PRINT("2530 NOT YET IMPLEMENTED")),
-			line(2531, EXIT())
+			line(2699, PRINT("2530 NOT YET FULLY IMPLEMENTED")),
+			line(2790, GOTO(1270))
 		);
 		addLines(
 			line(2800, PRINT("2800 NOT YET IMPLEMENTED")),
-			line(2801, EXIT())
+			line(3449, PRINT("2800 NOT YET FULLY IMPLEMENTED")),
+			line(3450, GOTO(1270))
 		);
 		addLines(
 			line(3460, PRINT("3460 NOT YET IMPLEMENTED")),
-			line(3461, EXIT())
+			line(3549, PRINT("3460 NOT YET FULLY IMPLEMENTED")),
+			line(3550, GOTO(1270))
 		);
 		addLines(
 			line(3560, PRINT("3560 NOT YET IMPLEMENTED")),
-			line(3561, EXIT())
+			line(3659, PRINT("3560 NOT YET FULLY IMPLEMENTED")),
+			line(3660, GOTO(1270))
 		);
 		addLines(
 			line(4630, PRINT("4630 NOT YET IMPLEMENTED")),
-			line(4631, EXIT())
+			line(5319, PRINT("4630 NOT YET FULLY IMPLEMENTED")),
+			line(5320, GOTO(1270))
 		);
 		addLines(
 			line(4120, FOR(I).FROM(SUBTRACT(S1,1)).TO(ADD(S1,1))),

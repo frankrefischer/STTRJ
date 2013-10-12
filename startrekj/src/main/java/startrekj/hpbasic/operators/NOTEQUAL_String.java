@@ -20,7 +20,9 @@ public class NOTEQUAL_String implements BooleanExpression {
 		return new NOTEQUAL_String(expression1, expression2);
 	}
 	public boolean evaluate() {
-		return !expression1.evaluate().equals(expression2);
+		String value1 = expression1.evaluate();
+		String value2 = expression2.evaluate();
+		return !value1.equals(value2);
 	}
 	@Override
 	public String toString() {

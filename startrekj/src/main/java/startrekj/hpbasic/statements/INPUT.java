@@ -24,18 +24,19 @@ public class INPUT implements Statement {
 	}
 
 	public void execute() {
-		while(true) {
-			try {
-				String lineRead = new Scanner(System.in).nextLine();
-				Number numberRead = Double.parseDouble(lineRead);
-				if(variable.evaluate() instanceof Integer)
-					variable.setValue(numberRead.intValue());
-				else
-					variable.setValue(numberRead);
-				return;
-			} catch (NumberFormatException e) {
-				System.out.println("error: not number");
-			}
+		String lineRead = new Scanner(System.in).nextLine();
+		Number numberRead = parseDouble(lineRead);
+		if(variable.evaluate() instanceof Integer)
+			variable.setValue(numberRead.intValue());
+		else
+			variable.setValue(numberRead);
+		return;
+	}
+	private Double parseDouble(String line) {
+		try {
+			return Double.parseDouble(line);
+		} catch (NumberFormatException e) {
+			return Double.NaN;
 		}
 	}
 }
