@@ -25,6 +25,6 @@ public class EQUAL implements BooleanExpression {
 	}
 	@Override
 	public String toString() {
-		return expression1 + "<" + expression2;
+		return expression1 + "=" + expression2;
 	}
 }
