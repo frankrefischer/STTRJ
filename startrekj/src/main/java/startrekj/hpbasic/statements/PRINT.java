@@ -3,6 +3,7 @@ package startrekj.hpbasic.statements;
 import startrekj.hpbasic.NumericExpression;
 import startrekj.hpbasic.NumericVariable;
 import startrekj.hpbasic.Statement;
+import startrekj.hpbasic.StringExpression;
 
 public class PRINT implements Statement {
 
@@ -38,6 +39,9 @@ public class PRINT implements Statement {
 		if (part instanceof NumericExpression) {
 			NumericExpression expression = (NumericExpression) part;
 			System.out.print(" " + expression.evaluate());
+		} else if (part instanceof StringExpression) {
+			StringExpression expression = (StringExpression) part;
+			System.out.println(" " + expression.evaluate());
 		}
 		else
 			System.out.print(part);

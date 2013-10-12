@@ -1,6 +1,7 @@
 package startrekj.hpbasic.statements;
 
 import startrekj.hpbasic.Statement;
+import startrekj.hpbasic.StringExpression;
 import startrekj.hpbasic.StringVariable;
 
 public class SET_StringVariable implements Statement {
@@ -28,14 +29,14 @@ public class SET_StringVariable implements Statement {
 	@Override
 	public String toString() {
 		if (offset == 1)
-			return variable.getName() + "=\"" + getValueAsString() + "\"";
-		return variable.getName() + "[" + offset + "]=\"" + getValueAsString() + "\"";
+			return variable.getName() + "=\"" + value + "\"";
+		return variable.getName() + "[" + offset + "]=\"" + value + "\"";
 	}
 	
 	private String getValueAsString() {
-		if (value instanceof StringVariable) {
-			StringVariable variable = (StringVariable)value;
-			return variable.getValue();
+		if (value instanceof StringExpression) {
+			StringExpression expression = (StringExpression)value;
+			return expression.evaluate();
 		}
 		return value.toString();
 	}

@@ -28,6 +28,9 @@ public class SUBSTRING implements StringExpression {
 	}
 
 	public String evaluate() {
-		return expression.evaluate().substring(from.evaluate().intValue()-1, to.evaluate().intValue());
+		String value = expression.evaluate();
+		int beginIndex = from.evaluate().intValue()-1;
+		int endIndex = to.evaluate().intValue();
+		return value.substring(beginIndex, endIndex);
 	}
 }
