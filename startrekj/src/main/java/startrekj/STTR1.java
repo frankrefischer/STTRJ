@@ -2,6 +2,7 @@ package startrekj;
 
 import static startrekj.hpbasic.Line.*;
 import static startrekj.hpbasic.functions.ADD.*;
+import static startrekj.hpbasic.functions.DIV.*;
 import static startrekj.hpbasic.functions.INT.*;
 import static startrekj.hpbasic.functions.MULT.*;
 import static startrekj.hpbasic.functions.RND.*;
@@ -52,9 +53,11 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable A = new NumericVariable("A");
 	static NumericVariable B3 = new NumericVariable("B3");
 	static NumericVariable B9 = new NumericVariable("B9");
+	static NumericVariable C1 = new NumericVariable("C1");
 	static NumericVariable D0 = new NumericVariable("D0");
 	static NumericVariable E = new NumericVariable("E");
 	static NumericVariable E0 = new NumericVariable("E0");
+	static NumericVariable H = new NumericVariable("H");
 	static NumericVariable H8 = new NumericVariable("H8");
 	static NumericVariable I = new NumericVariable("I");
 	static NumericVariable J = new NumericVariable("J");
@@ -77,6 +80,7 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable T0 = new NumericVariable("T0");
 	static NumericVariable T7 = new NumericVariable("T7");
 	static NumericVariable T9 = new NumericVariable("T9");
+	static NumericVariable W1 = new NumericVariable("W1");
 	static NumericVariable X = new NumericVariable("X");
 	static NumericVariable Z1 = new NumericVariable("Z1");
 	static NumericVariable Z2 = new NumericVariable("Z2");
@@ -288,15 +292,44 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(1330, PRINT("   2 = LONG RANGE SENSOR SCAN")),
 			line(1340, PRINT("   3 = FIRE PHASERS")),
 			line(1350, PRINT("   4 = FIRE PHOTON TORPEDOE")),
-			line(1360, PRINT("   5 = SHIELD CONTRO")),
+			line(1360, PRINT("   5 = SHIELD CONTROL")),
 			line(1370, PRINT("   6 = DAMAGE CONTROL REPORT")),
 			line(1380, PRINT("   7 = CALL ON LIBRARY COMPUTE")),
 			line(1400, GOTO(1270))
 		);
 		addLines(
 			line(1410, PRINT("COURSE (1-9):")),
-			line(1599, PRINT("1410 NOT YET FULLY IMPLEMENTED")),
-			line(1600, GOTO(1270))
+			line(1420, INPUT(C1)),
+			line(1430, IF(EQUAL(C1,0)).THEN(1270)),
+			line(1440, IF(OR(LESSTHAN(C1,1),GREATERTHANOREQUAL(C1,9))).THEN(1410)),
+			line(1450, PRINT("WARP FACTOR (0-8):")),
+			line(1460, INPUT(W1)),
+			line(1470, IF(OR(LESSTHAN(W1,0),GREATERTHAN(W1,8))).THEN(1410)),
+			line(1480, IF(OR(GREATERTHANOREQUAL(D.at(1),0),LESSTHANOREQUAL(W1,.2))).THEN(1510)),
+			line(1490, PRINT("WARP ENGINES ARE DAMAGED, MAXIMUM SPEED = WARP .2")),
+			line(1500, GOTO(1410)),
+			line(1510, IF(LESSTHANOREQUAL(K3,0)).THEN(1560)),
+			line(1520, GOSUB(3790)),
+			line(1530, IF(LESSTHANOREQUAL(K3,0)).THEN(1560)),
+			line(1540, IF(LESSTHAN(S,0)).THEN(4000)),
+			line(1550, GOTO(1610)),
+			line(1560, IF(GREATERTHAN(E,0)).THEN(1610)),
+			line(1570, IF(LESSTHAN(S,1)).THEN(3920)),
+			line(1580, PRINT("YOU HAVE",E," UNITS OF ENERGY")),
+			line(1590, PRINT("SUGGEST YOU GET SOME FROM YOUR SHIELDS WHICH HAVE",S," UNITS LEFT")),
+			line(1600, GOTO(1270)),
+			line(1610, FOR(I).FROM(I).TO(8)),
+			line(1620, IF(GREATERTHANOREQUAL(D.at(I),0)).THEN(1640)),
+			line(1630, SET(D.at(I)).TO(ADD(D.at(I),1))),
+			line(1640, NEXT(I)),
+			line(1650, IF(GREATERTHAN(RND(),.2)).THEN(1810)),
+			line(1660, SET(R1,INT(ADD(MULT(RND(),8),1)))),
+			line(1670, IF(GREATERTHANOREQUAL(RND(),.5)).THEN(1750)),
+			line(1680, SET(D.at(R1)).TO(SUBTRACT(D.at(R1),ADD(MULT(RND(),5),1)))),
+			line(1690, PRINT()),
+			line(1700, PRINT("DAMAGE CONTROL REPORT:")),
+			line(1701, PRINT("1410 NOT YET FULLY IMPLEMENTED")),
+			line(1702, GOTO(1270))
 		);
 		addLines(
 			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
@@ -319,9 +352,39 @@ line(1259, PRINT("S1,S2=",S1,",",S2)),
 			line(3550, GOTO(1270))
 		);
 		addLines(
+			line(3790, IF(NOTEQUAL(C$,"DOCKED")).THEN(3820)),
+			line(3800, PRINT("STAR BASE SHIELDS PROTECT THE ENTERPRISE")),
+			line(3810, RETURN()),
+			line(3820, IF(LESSTHANOREQUAL(K3,0)).THEN(3910)),
+			line(3830, FOR(I).FROM(1).TO(3)),
+			line(3840, IF(LESSTHANOREQUAL(K.at(I,3),0)).THEN(3900)),
+			line(3850, SET(H,MULT(DIV(K.at(I,3),FND),MULT(2,RND())))),
+			line(3860, SET(S,SUBTRACT(S,H))),
+			line(3870, PRINT_USING(3880, H,K.at(I,1),K.at(I,2),S)),
+			line(3880, IMAGE().FORMAT("4D").STRING(" UNIT HIT ON ENTERPRISE AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING("   (").FORMAT("4D").STRING(" LEFT")),
+			line(3890, IF(LESSTHAN(S,0)).THEN(4000)),
+			line(3900, NEXT(I)),
+			line(3910, RETURN())
+		);
+	addLines(
+			line(3920, PRINT("THE ENTERPRISE IS DEAD IN SPACE.  IF YOU SURVIVE ALL IMPENDING")),
+			line(3930, PRINT("ATTACK YOU WILL BE DEMOTED TO THE RANK OF PRIVATE")),
+			line(3940, IF(LESSTHANOREQUAL(K3,0)).THEN(4020)),
+			line(3950, GOSUB(3790)),
+			line(3960, GOTO(3940))
+		);
+		addLines(
 			line(3560, PRINT("3560 NOT YET IMPLEMENTED")),
 			line(3659, PRINT("3560 NOT YET FULLY IMPLEMENTED")),
 			line(3660, GOTO(1270))
+		);
+		addLines(
+			line(4000, PRINT()),
+			line(4010, PRINT("THE ENTERPRISE HAS BEEN DESTROYED.  THE FEDERATION WILL BE CONQUERED"))
+		);
+		addLines(
+			line(4020, PRINT("THERE ARE STILL",K9," KLINGON BATTLE CRUISERS")),
+			line(4030, GOTO(230))
 		);
 		addLines(
 			line(4630, PRINT("4630 NOT YET IMPLEMENTED")),

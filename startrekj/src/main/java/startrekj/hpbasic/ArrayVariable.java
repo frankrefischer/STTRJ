@@ -2,6 +2,8 @@ package startrekj.hpbasic;
 
 import java.util.Vector;
 
+import javax.swing.JSpinner.NumberEditor;
+
 public class ArrayVariable {
 
 	private String name;
@@ -30,6 +32,9 @@ public class ArrayVariable {
 	}
 	public ArrayPlace at(Number i) {
 		return at(new CONST(i), new CONST(1));
+	}
+	public ArrayPlace at(NumericExpression i) {
+		return at(i, new CONST(1));
 	}
 	public ArrayPlace at(Number i, Number j) {
 		return at(new CONST(i), new CONST(j));
