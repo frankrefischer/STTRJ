@@ -24,13 +24,19 @@ public class INPUT implements Statement {
 	}
 
 	public void execute() {
-		String lineRead = new Scanner(System.in).nextLine();
-		Number numberRead = parseDouble(lineRead);
+		Number numberRead = readNumber();
 		if(variable.evaluate() instanceof Integer)
 			variable.setValue(numberRead.intValue());
 		else
 			variable.setValue(numberRead);
-		return;
+	}
+	private Number readNumber() {
+		while(true) {
+			String lineRead = new Scanner(System.in).nextLine();
+			Number numberRead = parseDouble(lineRead);
+			if(!numberRead.equals(Double.NaN))
+				return numberRead;
+		}
 	}
 	private Double parseDouble(String line) {
 		try {

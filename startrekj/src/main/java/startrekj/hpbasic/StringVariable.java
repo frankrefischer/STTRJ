@@ -31,6 +31,7 @@ public class StringVariable implements StringExpression {
 	}
 
 	public void setValue(String value) {
+		clear();
 		this.value.insert(0, value);
 	}
 

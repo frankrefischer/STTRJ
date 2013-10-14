@@ -21,6 +21,8 @@ public class NumericVariable implements NumericExpression {
 
 	public void setValue(Number value) {
 		this.value = value;
+		if(name.equals("Q1")||name.equals("Q2")||name.equals("S1")||name.equals("S2"))
+			System.out.println("value changed: " + name + "=" + value);
 	}
 
 	public Number getValue() {

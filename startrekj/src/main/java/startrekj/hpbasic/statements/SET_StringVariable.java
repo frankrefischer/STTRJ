@@ -23,7 +23,10 @@ public class SET_StringVariable implements Statement {
 	}
 
 	public void execute() {
-		variable.insert(offset, getValueAsString());
+		if(offset== 1)
+			variable.setValue(getValueAsString());
+		else
+			variable.insert(offset, getValueAsString());
 	}
 	
 	@Override

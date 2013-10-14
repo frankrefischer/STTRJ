@@ -129,7 +129,7 @@ public class STTR1 extends HPBasicProgram {
 		STTR1 startrek = new STTR1();
 		
 		startrek.loadProgramLines();
-		System.out.println(startrek);
+//		System.out.println(startrek);
 		startrek.run();
 	}
 
@@ -322,7 +322,7 @@ public class STTR1 extends HPBasicProgram {
 			line(1580, PRINT("YOU HAVE",E," UNITS OF ENERGY")),
 			line(1590, PRINT("SUGGEST YOU GET SOME FROM YOUR SHIELDS WHICH HAVE",S," UNITS LEFT")),
 			line(1600, GOTO(1270)),
-			line(1610, FOR(I).FROM(I).TO(8)),
+			line(1610, FOR(I).FROM(1).TO(8)),
 			line(1620, IF(GREATERTHANOREQUAL(D.at(I),0)).THEN(1640)),
 			line(1630, SET(D.at(I)).TO(ADD(D.at(I),1))),
 			line(1640, NEXT(I)),
@@ -350,8 +350,8 @@ public class STTR1 extends HPBasicProgram {
 			line(1870, SET(X,S1)),
 			line(1880, SET(Y,S2)),
 			line(1885, SET(C2,INT(C1))),
-			line(1890, SET(X1,ADD(C.at(C2,1),MULT(SUBTRACT(C.at(ADD(C2,1),C.at(C2,1)),C.at(C2,1)),SUBTRACT(C1,C2))))),
-			line(1900, SET(X2,ADD(C.at(C2,2),MULT(SUBTRACT(C.at(ADD(C2,2),C.at(C2,2)),C.at(C2,2)),SUBTRACT(C1,C2))))),
+			line(1890, SET(X1,ADD(C.at(C2,1),MULT(SUBTRACT(C.at(ADD(C2,1),1),C.at(C2,1)),SUBTRACT(C1,C2))))),
+			line(1900, SET(X2,ADD(C.at(C2,2),MULT(SUBTRACT(C.at(ADD(C2,1),2),C.at(C2,2)),SUBTRACT(C1,C2))))),
 			line(1910, FOR(I).FROM(1).TO(NN)),
 			line(1920, SET(S1, ADD(S1,X1))),
 			line(1930, SET(S2, ADD(S2,X2))),
@@ -377,6 +377,24 @@ public class STTR1 extends HPBasicProgram {
 			line(2140, SET(T,ADD(T,1))),
 			line(2150, IF(GREATERTHAN(T,ADD(T0,T9))).THEN(3970)),
 			line(2160, GOTO(1260))
+		);
+		addLines(
+			line(2170, SET(X, ADD(MULT(Q1,8),ADD(X,MULT(X1,NN))))),
+			line(2180, SET(Y, ADD(MULT(Q2,8),ADD(Y,MULT(X2,NN))))),
+			line(2190, SET(Q1,INT(DIV(X,8)))),
+			line(2200, SET(Q2,INT(DIV(Y,8)))),
+			line(2210, SET(S1,INT(SUBTRACT(X,ADD(MULT(Q1,8),.5))))),
+			line(2220, SET(S2,INT(SUBTRACT(Y,ADD(MULT(Q2,8),.5))))),
+			line(2230, IF(NOTEQUAL(S1,0)).THEN(2260)),
+			line(2240, SET(Q1,SUBTRACT(Q1,1))),
+			line(2250, SET(S1,8)),
+			line(2260, IF(NOTEQUAL(S2,0)).THEN(2290)),
+			line(2270, SET(Q2,SUBTRACT(Q2,1))),
+			line(2280, SET(S2,8)),
+			line(2290, SET(T,ADD(T,1))),
+			line(2300, SET(E,SUBTRACT(E,ADD(NN,5)))),
+			line(2310, IF(GREATERTHAN(T,ADD(T0,T9))).THEN(3970)),
+			line(2320, GOTO(810))
 		);
 		addLines(
 			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
@@ -439,11 +457,6 @@ public class STTR1 extends HPBasicProgram {
 			line(4030, GOTO(230))
 		);
 		addLines(
-			line(4630, PRINT("4630 NOT YET IMPLEMENTED")),
-			line(5319, PRINT("4630 NOT YET FULLY IMPLEMENTED")),
-			line(5320, GOTO(1270))
-		);
-		addLines(
 			line(4120, FOR(I).FROM(SUBTRACT(S1,1)).TO(ADD(S1,1))),
 			line(4130, FOR(J).FROM(SUBTRACT(S2,1)).TO(ADD(S2,1))),
 			line(4140, IF(OR(LESSTHAN(I,1),OR(GREATERTHAN(I,8),OR(LESSTHAN(J,1),GREATERTHAN(J,8))))).THEN(4200)),
@@ -499,6 +512,11 @@ public class STTR1 extends HPBasicProgram {
 			line(4620, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SHIELDS").FORMAT("8X").FORMAT("6D"))
 		);
 		addLines(
+			line(4630, PRINT("4630 NOT YET IMPLEMENTED")),
+			line(5319, PRINT("4630 NOT YET FULLY IMPLEMENTED")),
+			line(5320, GOTO(1270))
+			);
+		addLines(
 			line(5330, IMAGE().STRING("     1     2     3     4     5     6     7     8")),
 			line(5340, IMAGE().STRING("--------------------------------------------------")),
 			line(5350, IMAGE().FORMAT("D").FORMAT("8(3X,3D)")),
@@ -515,6 +533,18 @@ public class STTR1 extends HPBasicProgram {
 			line(5440, IF(EQUAL(Z3,0)).THEN(5380)),
 			line(5450, RETURN())
 		);
+		addLines(
+			line(5510, REM("REM ******  INSERTION IN STRING ARRAY FOR QUADRANT ******")),
+			line(5520, SET(S8,SUBTRACT(ADD(MULT(Z1,24),MULT(Z2,3)),26) )),
+			line(5530, IF(GREATERTHAN(S8,72)).THEN(5560)),
+			line(5540, REPLACE(Q$,S8,ADD(S8,2)).WITH(A$)),
+			line(5550, GOTO(5600)),
+			line(5560, IF(GREATERTHAN(S8,144)).THEN(5590)),
+			line(5570, REPLACE(R$,SUBTRACT(S8,72),SUBTRACT(S8,70)).WITH(A$)),
+			line(5580, GOTO(5600)),
+			line(5590, REPLACE(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)).WITH(A$)),
+			line(5600, RETURN())
+			);
 		addLines(
 			line(5610, REM("****  PRINTS DEVICE NAME FROM ARRAY ****")),
 			line(5620, SET(S8,SUBTRACT(MULT(R1,12),11))),
@@ -543,18 +573,6 @@ public class STTR1 extends HPBasicProgram {
 			line(5810, RETURN())
 		);
 		addLines(
-			line(5510, REM("REM ******  INSERTION IN STRING ARRAY FOR QUADRANT ******")),
-			line(5520, SET(S8,SUBTRACT(ADD(MULT(Z1,24),MULT(Z2,3)),26) )),
-			line(5530, IF(GREATERTHAN(S8,72)).THEN(5560)),
-			line(5540, REPLACE(Q$,S8,ADD(S8,2)).WITH(A$)),
-			line(5550, GOTO(5600)),
-			line(5560, IF(GREATERTHAN(S8,144)).THEN(5590)),
-			line(5570, REPLACE(R$,SUBTRACT(S8,72),SUBTRACT(S8,70)).WITH(A$)),
-			line(5580, GOTO(5600)),
-			line(5590, REPLACE(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)).WITH(A$)),
-			line(5600, RETURN())
-		);
-		addLines(
 			line(5820, PRINT("     INSTRUCTIONS:")),
 			line(5830, PRINT("<*> = ENTERPRISE")),
 			line(5840, PRINT("+++ = KLINGON")),
@@ -576,7 +594,7 @@ public class STTR1 extends HPBasicProgram {
 			line(6000, PRINT("  USE COURSE 3, WARP FACTOR 1")),
 			line(6010, PRINT("COMMAND 1 = SHORT RANGE SENSOR SCAN")),
 			line(6020, PRINT("  PRINTS THE QUADRANT YOU ARE CURRENTLY IN, INCLUDING")),
-			line(6030, PRINT("  STARS, KLINGONS, STARBASES, AND THE ENTERPRISE; ALON")),
+			line(6030, PRINT("  STARS, KLINGONS, STARBASES, AND THE ENTERPRISE; ALONG")),
 			line(6040, PRINT("  WITH OTHER PERTINATE INFORMATION.")),
 			line(6050, PRINT("COMMAND 2 = LONG RANGE SENSOR SCAN")),
 			line(6060, PRINT("  SHOWS CONDITIONS IN SPACE FOR ONE QUADRANT ON EACH SIDE")),

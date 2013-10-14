@@ -26,6 +26,6 @@ public class MULT implements NumericExpression {
 	}
 	@Override
 	public String toString() {
-		return operand1 + "*" + operand2;
+		return "(" + operand1 + ")*(" + operand2 +")";
 	}
 }
