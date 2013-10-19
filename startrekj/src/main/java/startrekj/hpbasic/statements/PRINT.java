@@ -33,6 +33,7 @@ public class PRINT implements Statement {
 		for(Object part: parts)
 			print(part);
 		System.out.println();
+		System.out.flush();
 	}
 
 	private void print(Object part) {

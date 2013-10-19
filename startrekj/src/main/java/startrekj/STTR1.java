@@ -394,7 +394,7 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(2330, IF(GTE(D.at(3), 0)).THEN(2370)),
 			line(2340, PRINT("LONG RANGE SENSORS ARE INOPERABE")),
-			line(2350, IMAGE().STRING("LONG RANGE SENSOR SCAN FOR QUADRANT").FORMAT("D").STRING(",").FORMAT("D")),
+			line(2350, IMAGE().STRING("LONG RANGE SENSOR SCAN FOR QUADRANT").FORMAT_D().STRING(",").FORMAT_D()),
 			line(2360, GOTO(1270)),
 			line(2370, PRINT_USING(2350, Q1, Q2)),
 			line(2380, PRINT_USING(2520)),
@@ -404,13 +404,13 @@ public class STTR1 extends HPBasicProgram {
 			line(2420, IF(OR(LT(I,1),OR(GT(I,8),OR(LT(J,1),GT(J,8))))).THEN(2460)),
 			line(2430, SET(N.at(ADD(SUBTRACT(J,Q2),2))).TO(G.at(I,J))),
 			line(2440, IF(LT(D.at(7),0)).THEN(2460)),
-			line(2450, SET(Z.at(I,J),G.at(I,J))),
+			line(2450, SET(Z.at(I,J)).TO(G.at(I,J))),
 			line(2460, NEXT(J)),
 			line(2470, PRINT_USING(2510, N.at(1), N.at(2), N.at(3))),
 			line(2480, PRINT_USING(2520)),
 			line(2490, NEXT(I)),
 			line(2500, GOTO(1270)),
-			line(2510, IMAGE().STRING(": ").FORMAT("3(3D,\" :\")")),
+			line(2510, IMAGE().STRING(": ").FORMAT_3_3D_STRING(" :)")),
 			line(2520, IMAGE().STRING("-----------------"))
 		);
 		addLines(
@@ -434,7 +434,7 @@ public class STTR1 extends HPBasicProgram {
 			line(2700, SET(H,MULT(DIV(DIV(X,K3),FND),MULT(2,RND())))),
 			line(2710, SET(K.at(I,3)).TO(SUBTRACT(K.at(I,3), H))),
 			line(2720, PRINT_USING(2730, H,K.at(I,1),K.at(I,2),K.at(I,3))),
-			line(2730, IMAGE().FORMAT("4D").STRING(" UNIT HIT ON KLINGON AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING("   (").FORMAT("3D").FORMAT("LEFT")),
+			line(2730, IMAGE().FORMAT_4D().STRING(" UNIT HIT ON KLINGON AT SECTOR ").FORMAT_D().STRING(",").FORMAT_D().STRING("   (").FORMAT_3D().STRING("LEFT")),
 			line(2740, IF(GT(K.at(I,3), 0)).THEN(2770)),
 			line(2750, GOSUB(3690)),
 			line(2770, NEXT(I)),
@@ -462,7 +462,7 @@ public class STTR1 extends HPBasicProgram {
 			line(2970, SET(Y,ADD(Y,X2))),
 			line(2980, IF(OR(LT(X, .5),OR(GTE(X, 8.5),OR(LT(Y, .5),GTE(Y, 8.5))))).THEN(3420)),
 			line(2990, PRINT_USING(3000, X,Y)),
-			line(3000, IMAGE().FORMAT("15X").FORMAT("D").STRING(",").FORMAT("D")),
+			line(3000, IMAGE().FORMAT_15X().FORMAT_D().STRING(",").FORMAT_D()),
 			line(3010, SET(A$, "   ")),
 			line(3020, SET(Z1,X)),
 			line(3030, SET(Z2,Y)),
@@ -540,7 +540,7 @@ public class STTR1 extends HPBasicProgram {
 		);
 		addLines(
 			line(3690, PRINT_USING(3700, K.at(I,1),K.at(I,2))),
-			line(3700, IMAGE().STRING(" KLINGON AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING(" DESTROYED ****")),
+			line(3700, IMAGE().STRING(" KLINGON AT SECTOR ").FORMAT_D().STRING(",").FORMAT_D().STRING(" DESTROYED ****")),
 			line(3710, SET(K3,SUBTRACT(K3, 1))),
 			line(3720, SET(K9,SUBTRACT(K9, 1))),
 			line(3730, SET(A$,"   ")),
@@ -560,7 +560,7 @@ public class STTR1 extends HPBasicProgram {
 			line(3850, SET(H,MULT(DIV(K.at(I,3),FND),MULT(2,RND())))),
 			line(3860, SET(S,SUBTRACT(S,H))),
 			line(3870, PRINT_USING(3880, H,K.at(I,1),K.at(I,2),S)),
-			line(3880, IMAGE().FORMAT("4D").STRING(" UNIT HIT ON ENTERPRISE AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING("   (").FORMAT("4D").STRING(" LEFT")),
+			line(3880, IMAGE().FORMAT_4D().STRING(" UNIT HIT ON ENTERPRISE AT SECTOR ").FORMAT_D().STRING(",").FORMAT_D().STRING("   (").FORMAT_4D().STRING(" LEFT")),
 			line(3890, IF(LT(S,0)).THEN(4000)),
 			line(3900, NEXT(I)),
 			line(3910, RETURN())
@@ -641,14 +641,14 @@ public class STTR1 extends HPBasicProgram {
 		);
 		addLines(
 			line(4540, IMAGE().STRING("---------------------------------")),
-			line(4550, IMAGE().FORMAT("8(X,3A)")),
-			line(4560, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("STARDATE").FORMAT("8X").FORMAT("5D")),
-			line(4570, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("CONDITION").FORMAT("8X").FORMAT("6A")),
-			line(4580, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("QUADRANT").FORMAT("9X").FORMAT("D").STRING(",").FORMAT("D")),
-			line(4590, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SECTOR").FORMAT("11X").FORMAT("D").STRING(",").FORMAT("D")),
-			line(4600, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("ENERGY").FORMAT("9X").FORMAT("6D")),
-			line(4610, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("PHOTON TORPEDOES").FORMAT("3D")),
-			line(4620, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SHIELDS").FORMAT("8X").FORMAT("6D"))
+			line(4550, IMAGE().FORMAT_8_X_3A()),
+			line(4560, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("STARDATE").FORMAT_8X().FORMAT_5D()),
+			line(4570, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("CONDITION").FORMAT_8X().FORMAT_6A()),
+			line(4580, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("QUADRANT").FORMAT_9X().FORMAT_D().STRING(",").FORMAT_D()),
+			line(4590, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("SECTOR").FORMAT_11X().FORMAT_D().STRING(",").FORMAT_D()),
+			line(4600, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("ENERGY").FORMAT_9X().FORMAT_6D()),
+			line(4610, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("PHOTON TORPEDOES").FORMAT_3D()),
+			line(4620, IMAGE().FORMAT_8_X_3A().FORMAT_8X().STRING("SHIELDS").FORMAT_8X().FORMAT_6D())
 		);
 		addLines(
 			line(4630, IF(GTE(D.at(8),0)).THEN(4660)),
@@ -665,7 +665,7 @@ public class STTR1 extends HPBasicProgram {
 		);
 		addLines(
 			line(4740, PRINT_USING(4750, Q1,Q2)),
-			line(4750, IMAGE().STRING("COMPUTER RECORD OF GALAXY FOR QUADRANT ").FORMAT("D").STRING(",").FORMAT("D")),
+			line(4750, IMAGE().STRING("COMPUTER RECORD OF GALAXY FOR QUADRANT ").FORMAT_D().STRING(",").FORMAT_D()),
 			line(4760, PRINT_USING(5330)),
 			line(4770, PRINT_USING(5360)),
 			line(4780, FOR(I).FROM(1).TO(8)),
@@ -692,7 +692,7 @@ public class STTR1 extends HPBasicProgram {
 			line(4950, SET(X,K.at(I,2))),
 			line(4960, GOTO(5010)),
 			line(4970, PRINT_USING(4980, Q1,Q2,S1,S2)),
-			line(4980, IMAGE().STRING("YOU ARE AT QUADRANT (").FORMAT("D").STRING(",").FORMAT("D").STRING(" )  SECTOR ( ").FORMAT("D").STRING(",").FORMAT("D").STRING(" )")),
+			line(4980, IMAGE().STRING("YOU ARE AT QUADRANT (").FORMAT_D().STRING(",").FORMAT_D().STRING(" )  SECTOR ( ").FORMAT_D().STRING(",").FORMAT_D().STRING(" )")),
 			line(4990, PRINT("SHIP'S & TARGET'S COORDINATES ARE")),
 			line(5000, INPUT(C1)),
 			line(5001, INPUT(A)),
@@ -734,9 +734,9 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(5330, IMAGE().STRING("     1     2     3     4     5     6     7     8")),
 			line(5340, IMAGE().STRING("--------------------------------------------------")),
-			line(5350, IMAGE().FORMAT("D").FORMAT("8(3X,3D)")),
+			line(5350, IMAGE().FORMAT_D().FORMAT_8_3X_3D()),
 			line(5360, IMAGE().STRING("   ----- ----- ----- ----- ----- ----- ----- -----")),
-			line(5370, IMAGE().STRING(" WARP ENGINES SHUTDOWN AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING( "DUE TO BAD NAVIGATION"))
+			line(5370, IMAGE().STRING(" WARP ENGINES SHUTDOWN AT SECTOR ").FORMAT_D().STRING(",").FORMAT_D().STRING( "DUE TO BAD NAVIGATION"))
 		);
 		addLines(
 			line(5380, SET(R1, INT(ADD(MULT(RND(),8),1)))),

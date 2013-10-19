@@ -14,7 +14,10 @@ public class StringChunk implements StringExpression {
 	public String evaluate() {
 		int beginIndex = from.evaluate().intValue()-1;
 		int endIndex = to.evaluate().intValue();
-		return expression.evaluate().substring(beginIndex, endIndex);
+		String string = expression.evaluate();
+		if(endIndex > string.length())
+			endIndex = string.length();
+		return string.substring(beginIndex, endIndex);
 	}
 	@Override
 	public String toString() {
