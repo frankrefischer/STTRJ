@@ -57,4 +57,12 @@ public final class Arithmetic {
 	public static boolean bothIntegers(Number number, Number otherNumber) {
 		return number instanceof Integer && otherNumber instanceof Integer;
 	}
+	public static Number abs(Number number) {
+		if(number instanceof Integer) {
+			Integer integer = (Integer) number;
+			return Math.abs(integer);
+		}
+		Double doubleValue = (Double) number;
+		return Math.abs(doubleValue);
+	}
 }

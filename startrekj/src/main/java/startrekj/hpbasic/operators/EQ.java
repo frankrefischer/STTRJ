@@ -6,19 +6,19 @@ import startrekj.hpbasic.NumericExpression;
 
 import static startrekj.hpbasic.Arithmetic.*;
 
-public class EQUAL implements BooleanExpression {
+public class EQ implements BooleanExpression {
 	private NumericExpression expression1;
 	private NumericExpression expression2;
 	
-	private EQUAL(NumericExpression expression1, NumericExpression expression2) {
+	private EQ(NumericExpression expression1, NumericExpression expression2) {
 		this.expression1 = expression1;
 		this.expression2 = expression2;
 	}
-	public static EQUAL EQUAL(NumericExpression expression1, Number number) {
-		return new EQUAL(expression1, new CONST(number));
+	public static EQ EQ(NumericExpression expression1, Number number) {
+		return new EQ(expression1, new CONST(number));
 	}
-	public static EQUAL EQUAL(NumericExpression expression1, NumericExpression expression2) {
-		return new EQUAL(expression1, expression2);
+	public static EQ EQ(NumericExpression expression1, NumericExpression expression2) {
+		return new EQ(expression1, expression2);
 	}
 	public boolean evaluate() {
 		return equal(expression1.evaluate(), expression2.evaluate());

@@ -16,7 +16,7 @@ public class SET_ArrayPlace implements Statement {
 	public static SET_ArrayPlace SET(ArrayPlace...arrayPlaces) {
 		return new SET_ArrayPlace(arrayPlaces);
 	}
-	public SET_ArrayPlace to(int value) {
+	public SET_ArrayPlace TO(int value) {
 		return TO(new CONST(value));
 	}
 	public SET_ArrayPlace TO(NumericExpression expression) {

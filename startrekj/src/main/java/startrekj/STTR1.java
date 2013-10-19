@@ -1,6 +1,7 @@
 package startrekj;
 
 import static startrekj.hpbasic.Line.*;
+import static startrekj.hpbasic.functions.ABS.*;
 import static startrekj.hpbasic.functions.ADD.*;
 import static startrekj.hpbasic.functions.DIV.*;
 import static startrekj.hpbasic.functions.INT.*;
@@ -10,13 +11,14 @@ import static startrekj.hpbasic.functions.SQR.*;
 import static startrekj.hpbasic.functions.SUBTRACT.*;
 import static startrekj.hpbasic.functions.TIM.*;
 import static startrekj.hpbasic.Arithmetic.*;
-import static startrekj.hpbasic.operators.EQUAL.*;
-import static startrekj.hpbasic.operators.GREATERTHAN.*;
-import static startrekj.hpbasic.operators.GREATERTHANOREQUAL.*;
-import static startrekj.hpbasic.operators.LESSTHAN.*;
-import static startrekj.hpbasic.operators.LESSTHANOREQUAL.*;
-import static startrekj.hpbasic.operators.NOTEQUAL.*;
-import static startrekj.hpbasic.operators.NOTEQUAL_String.*;
+import static startrekj.hpbasic.operators.EQ.*;
+import static startrekj.hpbasic.operators.EQ_String.*;
+import static startrekj.hpbasic.operators.GT.*;
+import static startrekj.hpbasic.operators.GTE.*;
+import static startrekj.hpbasic.operators.LT.*;
+import static startrekj.hpbasic.operators.LTE.*;
+import static startrekj.hpbasic.operators.NEQ.*;
+import static startrekj.hpbasic.operators.NEQ_String.*;
 import static startrekj.hpbasic.operators.OR.*;
 import static startrekj.hpbasic.operators.SUBSTRING.*;
 import static startrekj.hpbasic.statements.SET_ArrayPlace.*;
@@ -81,6 +83,7 @@ public class STTR1 extends HPBasicProgram {
 	static NumericVariable S9 = new NumericVariable("S9");
 	static NumericVariable T = new NumericVariable("T");
 	static NumericVariable T0 = new NumericVariable("T0");
+	static NumericVariable T1 = new NumericVariable("T1");
 	static NumericVariable T7 = new NumericVariable("T7");
 	static NumericVariable T9 = new NumericVariable("T9");
 	static NumericVariable W1 = new NumericVariable("W1");
@@ -156,18 +159,10 @@ public class STTR1 extends HPBasicProgram {
 			line(170, GOSUB(5460))
 		);
 		addLines(
-			line(5460, REM()),
-			line(5460, FOR(I).FROM(1).TO(11)),
-			line(5470, PRINT("")),
-			line(5480, NEXT(I)),
-			line(5490, PRINT()),
-			line(5500, RETURN())
-		);
-		addLines(
 			line(180, PRINT("                          STAR TREK ")),
 			line(190, PRINT("DO YOU WANT INSTRUCTIONS (THEY'RE LONG!)")),
 			line(200, INPUT(A$)),
-			line(210, IF(NOTEQUAL(A$, "YES")).THEN(230)),
+			line(210, IF(NEQ(A$, "YES")).THEN(230)),
 			line(220, GOSUB(5820))
 		);
 		addLines(
@@ -200,9 +195,9 @@ public class STTR1 extends HPBasicProgram {
 			line(390, SET(S1, INT(ADD(MULT(RND(),8),1)) )),
 			line(400, SET(S2, INT(ADD(MULT(RND(),8),1)) )),
 			line(410, SET(T7, ADD(TIM(0), MULT(60,TIM(1))))),
-			line(420, SET(C.at(2,1), C.at(3,1), C.at(4,1), C.at(4,2), C.at(5,2), C.at(6,2)).to(-1)),
-			line(430, SET(C.at(1,1), C.at(3,2), C.at(5,1), C.at(7,2), C.at(9,1)).to(0)),
-			line(440, SET(C.at(1,2), C.at(2,1), C.at(6,1), C.at(7,1), C.at(8,1), C.at(8,2), C.at(9,2)).to(1)),
+			line(420, SET(C.at(2,1), C.at(3,1), C.at(4,1), C.at(4,2), C.at(5,2), C.at(6,2)).TO(-1)),
+			line(430, SET(C.at(1,1), C.at(3,2), C.at(5,1), C.at(7,2), C.at(9,1)).TO(0)),
+			line(440, SET(C.at(1,2), C.at(2,1), C.at(6,1), C.at(7,1), C.at(8,1), C.at(8,2), C.at(9,2)).TO(1)),
 			line(450, DIM(D,8)),
 			line(451, MAT(D,0)),
 			line(460, SET(D$, "WARP ENGINESS.R. SENSORSL.R. SENSORSPHASER CNTRL")),
@@ -212,9 +207,9 @@ public class STTR1 extends HPBasicProgram {
 			line(500, FOR(I).FROM(1).TO(8)),
 			line(510, FOR(J).FROM(1).TO(8)),
 			line(520, SET(R1, RND())),
-			line(530, IF(GREATERTHAN(R1,.98)).THEN(580)),
-			line(540, IF(GREATERTHAN(R1,.95)).THEN(610)),
-			line(550, IF(GREATERTHAN(R1,.8)).THEN(640)),
+			line(530, IF(GT(R1,.98)).THEN(580)),
+			line(540, IF(GT(R1,.95)).THEN(610)),
+			line(550, IF(GT(R1,.8)).THEN(640)),
 			line(560, SET(K3,0)),
 			line(570, GOTO(660)),
 			line(580, SET(K3,3)),
@@ -226,32 +221,32 @@ public class STTR1 extends HPBasicProgram {
 			line(640, SET(K3,1)),
 			line(650, SET(K9,ADD(K9,1))),
 			line(660, SET(R1,RND())),
-			line(670, IF(GREATERTHAN(R1,.96)).THEN(700)),
+			line(670, IF(GT(R1,.96)).THEN(700)),
 			line(680, SET(B3,0)),
 			line(690, GOTO(720)),
 			line(700, SET(B3,1)),
 			line(710, SET(B9,ADD(B9,1))),
 			line(720, SET(S3,INT(ADD(MULT(RND(),8),1)))),
 			line(730, SET(G.at(I,J)).TO(ADD(ADD(MULT(K3,100),MULT(B3,10)),S3))),
-			line(740, SET(Z.at(I,J)).to(0)),
+			line(740, SET(Z.at(I,J)).TO(0)),
 			line(750, NEXT(J)),
 			line(760, NEXT(I)),
 			line(770, SET(K7,K9)),
-			line(775, IF(OR(LESSTHANOREQUAL(B9,0),LESSTHANOREQUAL(K9,0))).THEN(490)),
+			line(775, IF(OR(LTE(B9,0),LTE(K9,0))).THEN(490)),
 			line(780, PRINT("YOU MUST DESTROY",K9, " KLINGONS IN",T9, " STARDATES WITH",B9," STARBASES")),
 			line(810, SET(K3, SET(B3, SET(S3, 0)))),
-			line(820, IF(OR(LESSTHAN(Q1,1),OR(GREATERTHAN(Q1,8),OR(LESSTHAN(Q2,1),GREATERTHAN(Q2,8))))).THEN(920)),
+			line(820, IF(OR(LT(Q1,1),OR(GT(Q1,8),OR(LT(Q2,1),GT(Q2,8))))).THEN(920)),
 			line(830, SET(X,MULT(G.at(Q1,Q2),.01))),
 			line(840, SET(K3,INT(X))),
 			line(850, SET(B3,INT(MULT(SUBTRACT(X,K3),10)))),
 			line(860, SET(S3,SUBTRACT(G.at(Q1,Q2),MULT(INT(MULT(G.at(Q1,Q2),.1)),10)))),
-			line(870, IF(EQUAL(K3,0)).THEN(910)),
-			line(880, IF(GREATERTHAN(S,200)).THEN(910)),
+			line(870, IF(EQ(K3,0)).THEN(910)),
+			line(880, IF(GT(S,200)).THEN(910)),
 			line(890, PRINT("COMBAT AREA      CONDITION RED")),
 			line(900, PRINT("   SHIELDS DANGEROUSLY LOW")),
 			line(910, MAT(K,0)),
 			line(920, FOR(I).FROM(1).TO(3)),
-			line(930, SET(K.at(I,3)).to(0)),
+			line(930, SET(K.at(I,3)).TO(0)),
 			line(940, NEXT(I)),
 			line(950, SET(Q$,Z$)),
 			line(960, SET(R$,Z$)),
@@ -304,31 +299,31 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(1410, PRINT("COURSE (1-9):")),
 			line(1420, INPUT(C1)),
-			line(1430, IF(EQUAL(C1,0)).THEN(1270)),
-			line(1440, IF(OR(LESSTHAN(C1,1),GREATERTHANOREQUAL(C1,9))).THEN(1410)),
+			line(1430, IF(EQ(C1,0)).THEN(1270)),
+			line(1440, IF(OR(LT(C1,1),GTE(C1,9))).THEN(1410)),
 			line(1450, PRINT("WARP FACTOR (0-8):")),
 			line(1460, INPUT(W1)),
-			line(1470, IF(OR(LESSTHAN(W1,0),GREATERTHAN(W1,8))).THEN(1410)),
-			line(1480, IF(OR(GREATERTHANOREQUAL(D.at(1),0),LESSTHANOREQUAL(W1,.2))).THEN(1510)),
+			line(1470, IF(OR(LT(W1,0),GT(W1,8))).THEN(1410)),
+			line(1480, IF(OR(GTE(D.at(1),0),LTE(W1,.2))).THEN(1510)),
 			line(1490, PRINT("WARP ENGINES ARE DAMAGED, MAXIMUM SPEED = WARP .2")),
 			line(1500, GOTO(1410)),
-			line(1510, IF(LESSTHANOREQUAL(K3,0)).THEN(1560)),
+			line(1510, IF(LTE(K3,0)).THEN(1560)),
 			line(1520, GOSUB(3790)),
-			line(1530, IF(LESSTHANOREQUAL(K3,0)).THEN(1560)),
-			line(1540, IF(LESSTHAN(S,0)).THEN(4000)),
+			line(1530, IF(LTE(K3,0)).THEN(1560)),
+			line(1540, IF(LT(S,0)).THEN(4000)),
 			line(1550, GOTO(1610)),
-			line(1560, IF(GREATERTHAN(E,0)).THEN(1610)),
-			line(1570, IF(LESSTHAN(S,1)).THEN(3920)),
+			line(1560, IF(GT(E,0)).THEN(1610)),
+			line(1570, IF(LT(S,1)).THEN(3920)),
 			line(1580, PRINT("YOU HAVE",E," UNITS OF ENERGY")),
 			line(1590, PRINT("SUGGEST YOU GET SOME FROM YOUR SHIELDS WHICH HAVE",S," UNITS LEFT")),
 			line(1600, GOTO(1270)),
 			line(1610, FOR(I).FROM(1).TO(8)),
-			line(1620, IF(GREATERTHANOREQUAL(D.at(I),0)).THEN(1640)),
+			line(1620, IF(GTE(D.at(I),0)).THEN(1640)),
 			line(1630, SET(D.at(I)).TO(ADD(D.at(I),1))),
 			line(1640, NEXT(I)),
-			line(1650, IF(GREATERTHAN(RND(),.2)).THEN(1810)),
+			line(1650, IF(GT(RND(),.2)).THEN(1810)),
 			line(1660, SET(R1,INT(ADD(MULT(RND(),8),1)))),
-			line(1670, IF(GREATERTHANOREQUAL(RND(),.5)).THEN(1750)),
+			line(1670, IF(GTE(RND(),.5)).THEN(1750)),
 			line(1680, SET(D.at(R1)).TO(SUBTRACT(D.at(R1),ADD(MULT(RND(),5),1)))),
 			line(1690, PRINT()),
 			line(1700, PRINT("DAMAGE CONTROL REPORT:")),
@@ -355,12 +350,12 @@ public class STTR1 extends HPBasicProgram {
 			line(1910, FOR(I).FROM(1).TO(NN)),
 			line(1920, SET(S1, ADD(S1,X1))),
 			line(1930, SET(S2, ADD(S2,X2))),
-			line(1940, IF(OR(LESSTHAN(S1,.5),OR(GREATERTHANOREQUAL(S1,8.5),OR(LESSTHAN(S2,.5),GREATERTHANOREQUAL(S2,8.5))))).THEN(2170)),
+			line(1940, IF(OR(LT(S1,.5),OR(GTE(S1,8.5),OR(LT(S2,.5),GTE(S2,8.5))))).THEN(2170)),
 			line(1950, SET(A$,"   ")),
 			line(1960, SET(Z1,S1)),
 			line(1970, SET(Z2,S2)),
 			line(1980, GOSUB(5680)),
-			line(1990, IF(NOTEQUAL(Z3,0)).THEN(2070)),
+			line(1990, IF(NEQ(Z3,0)).THEN(2070)),
 			line(2030, PRINT_USING(5370, S1,S2)),
 			line(2040, SET(S1,SUBTRACT(S1,X1))),
 			line(2050, SET(S2,SUBTRACT(S2,X2))),
@@ -373,9 +368,9 @@ public class STTR1 extends HPBasicProgram {
 			line(2100, SET(Z2,S2)),
 			line(2110, GOSUB(5510)),
 			line(2120, SET(E,ADD(SUBTRACT(E,NN),5))),
-			line(2130, IF(LESSTHAN(W1,1)).THEN(2150)),
+			line(2130, IF(LT(W1,1)).THEN(2150)),
 			line(2140, SET(T,ADD(T,1))),
-			line(2150, IF(GREATERTHAN(T,ADD(T0,T9))).THEN(3970)),
+			line(2150, IF(GT(T,ADD(T0,T9))).THEN(3970)),
 			line(2160, GOTO(1260))
 		);
 		addLines(
@@ -385,61 +380,195 @@ public class STTR1 extends HPBasicProgram {
 			line(2200, SET(Q2,INT(DIV(Y,8)))),
 			line(2210, SET(S1,INT(SUBTRACT(X,ADD(MULT(Q1,8),.5))))),
 			line(2220, SET(S2,INT(SUBTRACT(Y,ADD(MULT(Q2,8),.5))))),
-			line(2230, IF(NOTEQUAL(S1,0)).THEN(2260)),
+			line(2230, IF(NEQ(S1,0)).THEN(2260)),
 			line(2240, SET(Q1,SUBTRACT(Q1,1))),
 			line(2250, SET(S1,8)),
-			line(2260, IF(NOTEQUAL(S2,0)).THEN(2290)),
+			line(2260, IF(NEQ(S2,0)).THEN(2290)),
 			line(2270, SET(Q2,SUBTRACT(Q2,1))),
 			line(2280, SET(S2,8)),
 			line(2290, SET(T,ADD(T,1))),
 			line(2300, SET(E,SUBTRACT(E,ADD(NN,5)))),
-			line(2310, IF(GREATERTHAN(T,ADD(T0,T9))).THEN(3970)),
+			line(2310, IF(GT(T,ADD(T0,T9))).THEN(3970)),
 			line(2320, GOTO(810))
 		);
 		addLines(
-			line(2330, PRINT("2330 NOT YET IMPLEMENTED")),
-			line(2499, PRINT("2330 NOT YET FULLY IMPLEMENTED")),
-			line(2500, GOTO(1270))
+			line(2330, IF(GTE(D.at(3), 0)).THEN(2370)),
+			line(2340, PRINT("LONG RANGE SENSORS ARE INOPERABE")),
+			line(2350, IMAGE().STRING("LONG RANGE SENSOR SCAN FOR QUADRANT").FORMAT("D").STRING(",").FORMAT("D")),
+			line(2360, GOTO(1270)),
+			line(2370, PRINT_USING(2350, Q1, Q2)),
+			line(2380, PRINT_USING(2520)),
+			line(2390, FOR(I).FROM(SUBTRACT(Q1,1)).TO(ADD(Q1,1))),
+			line(2400, MAT(N, 0)),
+			line(2410, FOR(J).FROM(SUBTRACT(Q2, 1)).TO(ADD(Q2,1))),
+			line(2420, IF(OR(LT(I,1),OR(GT(I,8),OR(LT(J,1),GT(J,8))))).THEN(2460)),
+			line(2430, SET(N.at(ADD(SUBTRACT(J,Q2),2))).TO(G.at(I,J))),
+			line(2440, IF(LT(D.at(7),0)).THEN(2460)),
+			line(2450, SET(Z.at(I,J),G.at(I,J))),
+			line(2460, NEXT(J)),
+			line(2470, PRINT_USING(2510, N.at(1), N.at(2), N.at(3))),
+			line(2480, PRINT_USING(2520)),
+			line(2490, NEXT(I)),
+			line(2500, GOTO(1270)),
+			line(2510, IMAGE().STRING(": ").FORMAT("3(3D,\" :\")")),
+			line(2520, IMAGE().STRING("-----------------"))
 		);
 		addLines(
-			line(2530, PRINT("2530 NOT YET IMPLEMENTED")),
+			line(2530, IF(LTE(K3, 0)).THEN(3670)),
+			line(2540, IF(GTE(D.at(4), 0)).THEN(2570)),
+			line(2550, PRINT("PHASER CONTROL IS DISABLED")),
+			line(2560, GOTO(1270)),
+			line(2570, IF(GTE(D.at(7), 0)).THEN(2590)),
+			line(2580, PRINT(" COMPUTER FAILURE HANPERS ACCURACY")),
+			line(2590, PRINT("PHASERS LOCKED ON TARGET.  ENERGY AVAILABLE=",E)),
+			line(2600, PRINT("NUMBER OF UNITS TO FIRE:")),
+			line(2610, INPUT(X)),
+			line(2620, IF(LTE(X, 0)).THEN(1270)),
+			line(2630, IF(LT(SUBTRACT(E, X),0)).THEN(2570)),
+			line(2640, SET(E,SUBTRACT(E, X))),
+			line(2650, GOSUB(3790)),
+			line(2660, IF(GTE(D.at(7), 0)).THEN(2680)),
+			line(2670, SET(X,MULT(X,RND()))),
+			line(2680, FOR(I).FROM(1).TO(3)),
+			line(2690, IF(LTE(K.at(I,3),0)).THEN(2770)),
+			line(2700, SET(H,MULT(DIV(DIV(X,K3),FND),MULT(2,RND())))),
+			line(2710, SET(K.at(I,3)).TO(SUBTRACT(K.at(I,3), H))),
+			line(2720, PRINT_USING(2730, H,K.at(I,1),K.at(I,2),K.at(I,3))),
+			line(2730, IMAGE().FORMAT("4D").STRING(" UNIT HIT ON KLINGON AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING("   (").FORMAT("3D").FORMAT("LEFT")),
+			line(2740, IF(GT(K.at(I,3), 0)).THEN(2770)),
+			line(2750, GOSUB(3690)),
+			line(2770, NEXT(I)),
 			line(2699, PRINT("2530 NOT YET FULLY IMPLEMENTED")),
 			line(2790, GOTO(1270))
 		);
 		addLines(
-			line(2800, PRINT("2800 NOT YET IMPLEMENTED")),
-			line(3449, PRINT("2800 NOT YET FULLY IMPLEMENTED")),
+			line(2800, IF(GTE(D.at(5), 0)).THEN(2830)),
+			line(2810, PRINT(" PHOTON TUBES ARE NOT OPERATIONAL")),
+			line(2820, GOTO(1270)),
+			line(2830, IF(GT(P, 0)).THEN(2860)),
+			line(2840, PRINT("ALL PHOTON TORPEDOES ARE EXPENDED")),
+			line(2850, GOTO(1270)),
+			line(2860, PRINT("TORPEDO COURSE (1-9):")),
+			line(2870, INPUT(C1)),
+			line(2880, IF(EQ(C1, 0)).THEN(1270)),
+			line(2890, IF(OR(LT(C1, 1),GTE(C1, 9))).THEN(2860)),
+			line(2900, SET(X1, ADD(C.at(C2,1),MULT(SUBTRACT(C.at(ADD(C2,1),1),C.at(C2,1)),SUBTRACT(C1,C2))))),
+			line(2910, SET(X2, ADD(C.at(C2,2),MULT(SUBTRACT(C.at(ADD(C2,1),2),C.at(C2,2)),SUBTRACT(C1,C2))))),
+			line(2920, SET(X,S1)),
+			line(2930, SET(Y,S2)),
+			line(2940, SET(P,SUBTRACT(P, 1))),
+			line(2950, PRINT(" TORPEDO TRACK:")),
+			line(2960, SET(X,ADD(X,X1))),
+			line(2970, SET(Y,ADD(Y,X2))),
+			line(2980, IF(OR(LT(X, .5),OR(GTE(X, 8.5),OR(LT(Y, .5),GTE(Y, 8.5))))).THEN(3420)),
+			line(2990, PRINT_USING(3000, X,Y)),
+			line(3000, IMAGE().FORMAT("15X").FORMAT("D").STRING(",").FORMAT("D")),
+			line(3010, SET(A$, "   ")),
+			line(3020, SET(Z1,X)),
+			line(3030, SET(Z2,Y)),
+			line(3040, GOSUB(5680)),
+			line(3050, IF(EQ(Z3, 0)).THEN(3070)),
+			line(3060, GOTO(2960)),
+			line(3070, SET(A$,"+++")),
+			line(3080, SET(Z1,X)),
+			line(3090, SET(Z2,Y)),
+			line(3100, GOSUB(5680)),
+			line(3110, IF(EQ(Z3, 0)).THEN(3220)),
+			line(3120, PRINT("*** KLINGON DESTROYED ***")),
+			line(3130, SET(K3,SUBTRACT(K3, 1))),
+			line(3140, SET(K9,SUBTRACT(K9, 1))),
+			line(3150, IF(LTE(K9,0)).THEN(4040)),
+			line(3160, FOR(I).FROM(1).TO(3)),
+			line(3170, IF(NEQ(INT(ADD(X,.5)),K.at(I,1))).THEN(3190)),
+			line(3180, IF(EQ(INT(ADD(Y,.5)),K.at(I,2))).THEN(3200)),
+			line(3190, NEXT(I)),
+			line(3200, SET(K.at(I,3)).TO(0)),
+			line(3210, GOTO(3360)),
+			line(3220, SET(A$," * ")),
+			line(3230, SET(Z1,X)),
+			line(3240, SET(Z2,Y)),
+			line(3250, GOSUB(5680)),
+			line(3260, IF(EQ(Z3,0)).THEN(3290)),
+			line(3270, PRINT("YOU CANT'T DESTROY STARS SILLY")),
+			line(3280, GOTO(3420)),
+			line(3290, SET(A$,">!<")),
+			line(3300, SET(Z1,X)),
+			line(3310, SET(Z2,Y)),
+			line(3320, GOSUB(5680)),
+			line(3330, IF(EQ(Z3,0)).THEN(2960)),
+			line(3340, PRINT("*** STAR BASE DESTROYED ***  .......CONGRATULATIONS")),
+			line(3350, SET(B3,SUBTRACT(B3, 1))),
+			line(3360, SET(A$,"   ")),
+			line(3370, SET(Z1,INT(ADD(X,.5)))),
+			line(3380, SET(Z2,INT(ADD(Y,.5)))),
+			line(3390, GOSUB(5510)),
+			line(3400, SET(G.at(Q1,Q2)).TO(ADD(MULT(K3,100),ADD(MULT(B3,10),S3)))),
+			line(3410, GOTO(3430)),
+			line(3420, PRINT("TORPEDO MISSED")),
+			line(3430, GOSUB(3790)),
+			line(3440, IF(LT(E,0)).THEN(4000)),
 			line(3450, GOTO(1270))
-		);
+			);
 		addLines(
-			line(3460, PRINT("3460 NOT YET IMPLEMENTED")),
-			line(3549, PRINT("3460 NOT YET FULLY IMPLEMENTED")),
+			line(3460, IF(GTE(D.at(7),0)).THEN(3490)),
+			line(3470, PRINT("SHIELD CONTROL IS NON-OPERATIONAL")),
+			line(3480, GOTO(1270)),
+			line(3490, PRINT("ENERGY AVAILABLE =",ADD(E,S),"   NUMBER OF UNITS TO SHIELDS:")),
+			line(3500, INPUT(X)),
+			line(3510, IF(LTE(X,0)).THEN(1270)),
+			line(3520, IF(LT(ADD(E,SUBTRACT(S,X)),0)).THEN(3490)),
+			line(3530, SET(E,ADD(E,SUBTRACT(S,X)))),
+			line(3540, SET(S,X)),
 			line(3550, GOTO(1270))
 		);
 		addLines(
-			line(3560, PRINT("3560 NOT YET IMPLEMENTED")),
-			line(3659, PRINT("3560 NOT YET FULLY IMPLEMENTED")),
+			line(3560, IF(GTE(D.at(6),0)).THEN(3590)),
+			line(3570, PRINT("DAMAGE CONTROL REPORT IS NOT AVAILABLE")),
+			line(3580, GOTO(1270)),
+			line(3590, PRINT()),
+			line(3600, PRINT("DEVICE        STATE OF REPAIR")),
+			line(3610, FOR(R1).FROM(1).TO(8)),
+			line(3620, GOSUB(5610)),
+			line(3630, PRINT("",D.at(R1))),
+			line(3640,NEXT(R1)),
+			line(3650, PRINT()),
 			line(3660, GOTO(1270))
 		);
 		addLines(
-			line(3790, IF(NOTEQUAL(C$,"DOCKED")).THEN(3820)),
+			line(3670, PRINT("SHORT RANGE SENSORS REPORT NO KLINGONS IN THIS QUADRANT")),
+			line(3680, GOTO(1270))
+		);
+		addLines(
+			line(3690, PRINT_USING(3700, K.at(I,1),K.at(I,2))),
+			line(3700, IMAGE().STRING(" KLINGON AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING(" DESTROYED ****")),
+			line(3710, SET(K3,SUBTRACT(K3, 1))),
+			line(3720, SET(K9,SUBTRACT(K9, 1))),
+			line(3730, SET(A$,"   ")),
+			line(3740, SET(Z1,K.at(I,1))),
+			line(3750, SET(Z2,K.at(I,2))),
+			line(3760, GOSUB(5510)),
+			line(3770, SET(G.at(Q1,Q2)).TO(ADD(MULT(K3,100),ADD(MULT(B3,10),S3)))),
+			line(3780, RETURN())
+		);
+		addLines(
+			line(3790, IF(NEQ(C$,"DOCKED")).THEN(3820)),
 			line(3800, PRINT("STAR BASE SHIELDS PROTECT THE ENTERPRISE")),
 			line(3810, RETURN()),
-			line(3820, IF(LESSTHANOREQUAL(K3,0)).THEN(3910)),
+			line(3820, IF(LTE(K3,0)).THEN(3910)),
 			line(3830, FOR(I).FROM(1).TO(3)),
-			line(3840, IF(LESSTHANOREQUAL(K.at(I,3),0)).THEN(3900)),
+			line(3840, IF(LTE(K.at(I,3),0)).THEN(3900)),
 			line(3850, SET(H,MULT(DIV(K.at(I,3),FND),MULT(2,RND())))),
 			line(3860, SET(S,SUBTRACT(S,H))),
 			line(3870, PRINT_USING(3880, H,K.at(I,1),K.at(I,2),S)),
 			line(3880, IMAGE().FORMAT("4D").STRING(" UNIT HIT ON ENTERPRISE AT SECTOR ").FORMAT("D").STRING(",").FORMAT("D").STRING("   (").FORMAT("4D").STRING(" LEFT")),
-			line(3890, IF(LESSTHAN(S,0)).THEN(4000)),
+			line(3890, IF(LT(S,0)).THEN(4000)),
 			line(3900, NEXT(I)),
 			line(3910, RETURN())
 		);
 		addLines(
 			line(3920, PRINT("THE ENTERPRISE IS DEAD IN SPACE.  IF YOU SURVIVE ALL IMPENDING")),
 			line(3930, PRINT("ATTACK YOU WILL BE DEMOTED TO THE RANK OF PRIVATE")),
-			line(3940, IF(LESSTHANOREQUAL(K3,0)).THEN(4020)),
+			line(3940, IF(LTE(K3,0)).THEN(4020)),
 			line(3950, GOSUB(3790)),
 			line(3960, GOTO(3940))
 		);
@@ -457,14 +586,24 @@ public class STTR1 extends HPBasicProgram {
 			line(4030, GOTO(230))
 		);
 		addLines(
+			line(4040, PRINT()),
+			line(4050, PRINT("THE LAST KLINGON BATTLE CRUISER IN THE GALAXY HAS BEEN DESTROYED")),
+			line(4060, PRINT("THE FEDERATION HAS BEEN SAVED !!!")),
+			line(4070, PRINT()),
+			line(4080, PRINT("YOUR EFFICIENCY RATING =",MULT(DIV(K7,(SUBTRACT(T,T0))),1000))),
+			line(4090, SET(T1,ADD(TIM(0),MULT(TIM(1),60)))),
+			line(4100, PRINT("YOUR ACTUAL TIME OF MISSION = ",INT(MULT(SUBTRACT(MULT(SUBTRACT(T1,T7),.4),T7),100))," MINUTES")),
+			line(4110, GOTO(230))
+		);
+		addLines(
 			line(4120, FOR(I).FROM(SUBTRACT(S1,1)).TO(ADD(S1,1))),
 			line(4130, FOR(J).FROM(SUBTRACT(S2,1)).TO(ADD(S2,1))),
-			line(4140, IF(OR(LESSTHAN(I,1),OR(GREATERTHAN(I,8),OR(LESSTHAN(J,1),GREATERTHAN(J,8))))).THEN(4200)),
+			line(4140, IF(OR(LT(I,1),OR(GT(I,8),OR(LT(J,1),GT(J,8))))).THEN(4200)),
 			line(4150, SET(A$,">!<")),
 			line(4160, SET(Z1,I)),
 			line(4170, SET(Z2,J)),
 			line(4180, GOSUB(5680)),
-			line(4190, IF(EQUAL(Z3,1)).THEN(4240)),
+			line(4190, IF(EQ(Z3,1)).THEN(4240)),
 			line(4200, NEXT(J)),
 			line(4210, NEXT(I)),
 			line(4220, SET(D0,0)),
@@ -476,14 +615,14 @@ public class STTR1 extends HPBasicProgram {
 			line(4280, PRINT("SHIELDS DROPPED FOR DOCKING PURPOSES")),
 			line(4290, SET(S,0)),
 			line(4300, GOTO(4380)),
-			line(4310, IF(GREATERTHAN(K3,0)).THEN(4350)),
-			line(4320, IF(LESSTHAN(E,MULT(E0,.1))).THEN(4370)),
+			line(4310, IF(GT(K3,0)).THEN(4350)),
+			line(4320, IF(LT(E,MULT(E0,.1))).THEN(4370)),
 			line(4330, SET(C$,"GREEN")),
 			line(4340, GOTO(4380)),
 			line(4350, SET(C$,"RED")),
 			line(4360, GOTO(4380)),
 			line(4370, SET(C$,"YELLOW")),
-			line(4380, IF(GREATERTHANOREQUAL(D.at(2),0)).THEN(4430)),
+			line(4380, IF(GTE(D.at(2),0)).THEN(4430)),
 			line(4390, PRINT()),
 			line(4400, PRINT("*** SHORT RANGE SENSORS ARE OUT ***")),
 			line(4410, PRINT()),
@@ -512,10 +651,86 @@ public class STTR1 extends HPBasicProgram {
 			line(4620, IMAGE().FORMAT("8(X,3A)").FORMAT("8X").STRING("SHIELDS").FORMAT("8X").FORMAT("6D"))
 		);
 		addLines(
-			line(4630, PRINT("4630 NOT YET IMPLEMENTED")),
-			line(5319, PRINT("4630 NOT YET FULLY IMPLEMENTED")),
+			line(4630, IF(GTE(D.at(8),0)).THEN(4660)),
+			line(4640, PRINT("COMPUTER DISABLED")),
+			line(4650, GOTO(1270)),
+			line(4660, PRINT("COMPUTER ACTIVE AND AWAITING COMMAND")),
+			line(4670, INPUT(A)),
+			line(4680, GOTO(ADD(A,1)).OF(4740, 4830, 4880)),
+			line(4690, PRINT("FUNCTIONS AVAILABLE FROM COMPUTER")),
+			line(4700, PRINT("   0 = CUMULATIVE GALACTIC RECORD")),
+			line(4710, PRINT("   1 = STATUS REPORT")),
+			line(4720, PRINT("   2 = PHOTON TORPEDO DATA")),
+			line(4730, GOTO(4660))
+		);
+		addLines(
+			line(4740, PRINT_USING(4750, Q1,Q2)),
+			line(4750, IMAGE().STRING("COMPUTER RECORD OF GALAXY FOR QUADRANT ").FORMAT("D").STRING(",").FORMAT("D")),
+			line(4760, PRINT_USING(5330)),
+			line(4770, PRINT_USING(5360)),
+			line(4780, FOR(I).FROM(1).TO(8)),
+			line(4790, PRINT_USING(5350, I,Z.at(I,1),Z.at(I,2),Z.at(I,3),Z.at(I,4),Z.at(I,5),Z.at(I,6),Z.at(I,7),Z.at(I,8))),
+			line(4800, PRINT_USING(5360)),
+			line(4810, NEXT(I)),
+			line(4820, GOTO(1270))
+		);
+		addLines(
+			line(4830, PRINT("\012   STATUS REPORT\012")),
+			line(4830, PRINT("NUMBER OF KLINGONS LEFT =",K9)),
+			line(4830, PRINT("NUMBER OF STARDATES LEFT =",SUBTRACT(ADD(T0,T9), T))),
+			line(4830, PRINT("NUMBER OF STARBASES LEFT =",B9)),
+			line(4870, GOTO(3560))
+		);
+		addLines(
+			line(4880, PRINT()),
+			line(4890, SET(H8,0)),
+			line(4900, FOR(I).FROM(1).TO(3)),
+			line(4910, IF(LTE(K.at(I,3),0)).THEN(5260)),
+			line(4920, SET(C1,S1)),
+			line(4930, SET(A,S2)),
+			line(4940, SET(W1,K.at(I,1))),
+			line(4950, SET(X,K.at(I,2))),
+			line(4960, GOTO(5010)),
+			line(4970, PRINT_USING(4980, Q1,Q2,S1,S2)),
+			line(4980, IMAGE().STRING("YOU ARE AT QUADRANT (").FORMAT("D").STRING(",").FORMAT("D").STRING(" )  SECTOR ( ").FORMAT("D").STRING(",").FORMAT("D").STRING(" )")),
+			line(4990, PRINT("SHIP'S & TARGET'S COORDINATES ARE")),
+			line(5000, INPUT(C1)),
+			line(5001, INPUT(A)),
+			line(5002, INPUT(W1)),
+			line(5003, INPUT(X)),
+			line(5010, SET(X,SUBTRACT(X, A))),
+			line(5020, SET(A,SUBTRACT(C1, W1))),
+			line(5030, IF(LT(X,0)).THEN(5130)),
+			line(5040, IF(LT(A,0)).THEN(5190)),
+			line(5050, IF(GT(X,0)).THEN(5070)),
+			line(5060, IF(EQ(A,0)).THEN(5150)),
+			line(5070, SET(C1,1)),
+			line(5080, IF(LTE(ABS(A),ABS(X))).THEN(5110)),
+			line(5090, PRINT("DIRECTION=",ADD(C1,DIV(ADD(SUBTRACT(ABS(A),ABS(X)),ABS(A)),ABS(A))))),
+			line(5100, GOTO(5240)),
+			line(5110, PRINT("DIRECTION =",ADD(C1,DIV(ABS(A),ABS(X))))),
+			line(5120, GOTO(5240)),
+			line(5130, IF(GT(A,0)).THEN(5170)),
+			line(5140, IF(EQ(X,0)).THEN(5190)),
+			line(5150, SET(C1,5)),
+			line(5160, GOTO(5080)),
+			line(5170, SET(C1,3)),
+			line(5180, GOTO(5200)),
+			line(5190, SET(C1,7)),
+			line(5200, IF(GTE(ABS(A),ABS(X))).THEN(5230)),
+			line(5210, PRINT("DIRECTION=",ADD(C1,DIV(ADD(SUBTRACT(ABS(X),ABS(A)),ABS(X)),ABS(X))))),
+			line(5220, GOTO(5240)),
+			line(5230, PRINT("DIRECTION =",ADD(C1,DIV(ABS(X),ABS(A))))),
+			line(5240, PRINT("DISTANCE =",SQR(ADD(MULT(X,X),MULT(A,A))))),
+			line(5250, IF(EQ(H8,1)).THEN(5320)),
+			line(5260, NEXT(I)),
+			line(5270, SET(H8,0)),
+			line(5280, PRINT("DO YOU WANT TO USE THE CALCULATOR")),
+			line(5290, INPUT(A$)),
+			line(5300, IF(EQ(A$,"YES")).THEN(4970)),
+			line(5310, IF(NEQ(A$,"NO")).THEN(5280)),
 			line(5320, GOTO(1270))
-			);
+		);
 		addLines(
 			line(5330, IMAGE().STRING("     1     2     3     4     5     6     7     8")),
 			line(5340, IMAGE().STRING("--------------------------------------------------")),
@@ -530,16 +745,24 @@ public class STTR1 extends HPBasicProgram {
 			line(5410, SET(Z1,R1)),
 			line(5410, SET(Z2,R2)),
 			line(5430, GOSUB(5680)),
-			line(5440, IF(EQUAL(Z3,0)).THEN(5380)),
+			line(5440, IF(EQ(Z3,0)).THEN(5380)),
 			line(5450, RETURN())
+		);
+		addLines(
+			line(5460, REM()),
+			line(5460, FOR(I).FROM(1).TO(11)),
+			line(5470, PRINT("")),
+			line(5480, NEXT(I)),
+			line(5490, PRINT()),
+			line(5500, RETURN())
 		);
 		addLines(
 			line(5510, REM("REM ******  INSERTION IN STRING ARRAY FOR QUADRANT ******")),
 			line(5520, SET(S8,SUBTRACT(ADD(MULT(Z1,24),MULT(Z2,3)),26) )),
-			line(5530, IF(GREATERTHAN(S8,72)).THEN(5560)),
+			line(5530, IF(GT(S8,72)).THEN(5560)),
 			line(5540, REPLACE(Q$,S8,ADD(S8,2)).WITH(A$)),
 			line(5550, GOTO(5600)),
-			line(5560, IF(GREATERTHAN(S8,144)).THEN(5590)),
+			line(5560, IF(GT(S8,144)).THEN(5590)),
 			line(5570, REPLACE(R$,SUBTRACT(S8,72),SUBTRACT(S8,70)).WITH(A$)),
 			line(5580, GOTO(5600)),
 			line(5590, REPLACE(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)).WITH(A$)),
@@ -548,7 +771,7 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(5610, REM("****  PRINTS DEVICE NAME FROM ARRAY ****")),
 			line(5620, SET(S8,SUBTRACT(MULT(R1,12),11))),
-			line(5630, IF(GREATERTHAN(S8,72)).THEN(5660)),
+			line(5630, IF(GT(S8,72)).THEN(5660)),
 			line(5640, PRINT(D$.chunk(S8, ADD(S8,11)))),
 			line(5650, GOTO(5670)),
 			line(5660, PRINT(E$.chunk(SUBTRACT(S8,72), SUBTRACT(S8,61)))),
@@ -560,15 +783,15 @@ public class STTR1 extends HPBasicProgram {
 			line(5686, SET(Z2,INT(ADD(Z2,.5)))),
 			line(5690, SET(S8,SUBTRACT(ADD(MULT(Z1,24),MULT(Z2,3)),26))),
 			line(5700, SET(Z3,0)),
-			line(5710, IF(GREATERTHAN(S8,72)).THEN(5750)),
-			line(5720, IF(NOTEQUAL(SUBSTRING(Q$,S8,ADD(S8,2)),A$)).THEN(5810)),
+			line(5710, IF(GT(S8,72)).THEN(5750)),
+			line(5720, IF(NEQ(SUBSTRING(Q$,S8,ADD(S8,2)),A$)).THEN(5810)),
 			line(5730, SET(Z3,1)),
 			line(5740, GOTO(5810)),
-			line(5750, IF(GREATERTHAN(S8,144)).THEN(5790)),
-			line(5760, IF(NOTEQUAL(SUBSTRING(R$,SUBTRACT(S8,72),SUBTRACT(S8,70)),A$)).THEN(5810)),
+			line(5750, IF(GT(S8,144)).THEN(5790)),
+			line(5760, IF(NEQ(SUBSTRING(R$,SUBTRACT(S8,72),SUBTRACT(S8,70)),A$)).THEN(5810)),
 			line(5770, SET(Z3,1)),
 			line(5780, GOTO(5810)),
-			line(5790, IF(NOTEQUAL(SUBSTRING(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)),A$)).THEN(5810)),
+			line(5790, IF(NEQ(SUBSTRING(S$,SUBTRACT(S8,144),SUBTRACT(S8,142)),A$)).THEN(5810)),
 			line(5800, SET(Z3,1)),
 			line(5810, RETURN())
 		);
