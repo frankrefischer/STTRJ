@@ -197,7 +197,7 @@ public class STTR1 extends HPBasicProgram {
 			line(410, SET(T7, ADD(TIM(0), MULT(60,TIM(1))))),
 			line(420, SET(C.at(2,1), C.at(3,1), C.at(4,1), C.at(4,2), C.at(5,2), C.at(6,2)).TO(-1)),
 			line(430, SET(C.at(1,1), C.at(3,2), C.at(5,1), C.at(7,2), C.at(9,1)).TO(0)),
-			line(440, SET(C.at(1,2), C.at(2,1), C.at(6,1), C.at(7,1), C.at(8,1), C.at(8,2), C.at(9,2)).TO(1)),
+			line(440, SET(C.at(1,2), C.at(2,2), C.at(6,1), C.at(7,1), C.at(8,1), C.at(8,2), C.at(9,2)).TO(1)),
 			line(450, DIM(D,8)),
 			line(451, MAT(D,0)),
 			line(460, SET(D$, "WARP ENGINESS.R. SENSORSL.R. SENSORSPHASER CNTRL")),
@@ -237,7 +237,10 @@ public class STTR1 extends HPBasicProgram {
 			line(810, SET(K3, SET(B3, SET(S3, 0)))),
 			line(820, IF(OR(LT(Q1,1),OR(GT(Q1,8),OR(LT(Q2,1),GT(Q2,8))))).THEN(920)),
 			line(830, SET(X,MULT(G.at(Q1,Q2),.01))),
+line(831, PRINT("G(Q1,Q2)=",G.at(Q1,Q2))),
+line(832, PRINT("X=",X)),
 			line(840, SET(K3,INT(X))),
+line(841, PRINT("K3=",K3)),
 			line(850, SET(B3,INT(MULT(SUBTRACT(X,K3),10)))),
 			line(860, SET(S3,SUBTRACT(G.at(Q1,Q2),MULT(INT(MULT(G.at(Q1,Q2),.1)),10)))),
 			line(870, IF(EQ(K3,0)).THEN(910)),
@@ -394,7 +397,7 @@ public class STTR1 extends HPBasicProgram {
 		addLines(
 			line(2330, IF(GTE(D.at(3), 0)).THEN(2370)),
 			line(2340, PRINT("LONG RANGE SENSORS ARE INOPERABE")),
-			line(2350, IMAGE().STRING("LONG RANGE SENSOR SCAN FOR QUADRANT").FORMAT_D().STRING(",").FORMAT_D()),
+			line(2350, IMAGE().STRING("LONG RANGE SENSOR SCAN FOR QUADRANT ").FORMAT_D().STRING(",").FORMAT_D()),
 			line(2360, GOTO(1270)),
 			line(2370, PRINT_USING(2350, Q1, Q2)),
 			line(2380, PRINT_USING(2520)),
@@ -410,11 +413,12 @@ public class STTR1 extends HPBasicProgram {
 			line(2480, PRINT_USING(2520)),
 			line(2490, NEXT(I)),
 			line(2500, GOTO(1270)),
-			line(2510, IMAGE().STRING(": ").FORMAT_3_3D_STRING(" :)")),
+			line(2510, IMAGE().STRING(": ").FORMAT_3_3D_STRING(" :")),
 			line(2520, IMAGE().STRING("-----------------"))
 		);
 		addLines(
-			line(2530, IF(LTE(K3, 0)).THEN(3670)),
+		line(2530, PRINT("K3=",K3," K9=", K9)),
+			line(2531, IF(LTE(K3, 0)).THEN(3670)),
 			line(2540, IF(GTE(D.at(4), 0)).THEN(2570)),
 			line(2550, PRINT("PHASER CONTROL IS DISABLED")),
 			line(2560, GOTO(1270)),
@@ -438,7 +442,7 @@ public class STTR1 extends HPBasicProgram {
 			line(2740, IF(GT(K.at(I,3), 0)).THEN(2770)),
 			line(2750, GOSUB(3690)),
 			line(2770, NEXT(I)),
-			line(2699, PRINT("2530 NOT YET FULLY IMPLEMENTED")),
+			line(2780, IF(LT(E,0)).THEN(4000)),
 			line(2790, GOTO(1270))
 		);
 		addLines(

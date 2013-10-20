@@ -49,7 +49,7 @@ public class ArrayVariable {
 		array.set(index(i,j), value);
 	}
 	private int index(int i, int j) {
-		return (j-1)*size2 + (i-1);
+		return (j-1)*size1 + (i-1);
 	}
 	public void setAllTo(Number value) {
 		for(int i = 0; i < array.size(); ++i)
